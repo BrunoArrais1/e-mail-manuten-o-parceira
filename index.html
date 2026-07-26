@@ -220,13 +220,13 @@ IMPORTANTE:
 - O técnico deverá deixar o local somente após a validação ou confirmação do NOC FUST.
 - Havendo problemas com a liberação de acesso, favor entrar em contato.`;
 
-    const copia =
-        "noc_fust.br@telefonica.com"; 
-        
-    const link =
-        `mailto:${emailDestino}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+const copia =
+    "noc_fust.br@telefonica.com";
 
-    window.location.href = link;
+const link =
+`mailto:${emailDestino}?cc=${encodeURIComponent(copia)}&subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+
+window.location.href = link;
 
 }
 

@@ -1,118 +1,21 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Solicitação de Manutenção</title>
+<h1>Solicitação de Manutenção FUST</h1>
 
-<style>
-body{
-    font-family: Arial;
-    max-width:800px;
-    margin:auto;
-    padding:20px;
-}
+<input
+    id="inep"
+    type="text"
+    placeholder="Digite o INEP">
 
-input, textarea{
-    width:100%;
-    margin-bottom:10px;
-    padding:8px;
-}
-
-button{
-    background:#0078D4;
-    color:white;
-    border:none;
-    padding:12px;
-    cursor:pointer;
-}
-</style>
-
-</head>
-<body>
-
-<h2>Solicitação de Manutenção</h2>
-
-<input id="parceira" placeholder="Parceira">
-
-<input id="inep" placeholder="INEP">
-
-<input id="escola" placeholder="Escola">
-
-<input id="idvivo" placeholder="ID Vivo">
-
-<input id="chamado" placeholder="Chamado">
-
-<textarea id="falha"
-placeholder="Descrição da falha"></textarea>
-
-<button onclick="gerarEmail()">
-Gerar E-mail
+<button onclick="buscarINEP()">
+    Buscar INEP
 </button>
 
-<script>
+<br><br>
 
-function gerarEmail(){
+<label>Parceira</label>
+<input id="parceira" readonly>
 
-const parceira =
-document.getElementById("parceira").value;
+<label>Escola</label>
+<input id="escola" readonly>
 
-const inep =
-document.getElementById("inep").value;
-
-const escola =
-document.getElementById("escola").value;
-
-const id =
-document.getElementById("idvivo").value;
-
-const chamado =
-document.getElementById("chamado").value;
-
-const falha =
-document.getElementById("falha").value;
-
-const assunto =
-`MANUTENÇÃO - ${parceira} - INEP ${inep} - ${escola} - ID ${id} - CHAMADO ${chamado}`;
-
-const corpo = `Prezados,
-
-Pedimos por gentileza que enviem um Field para verificar os equipamentos da unidade abaixo:
-
-ID VIVO: ${id}
-INEP: ${inep}
-ESCOLA: ${escola}
-CHAMADO VIVO: ${chamado}
-
-Descrição da falha: ${falha}.
-
-Favor orientar o técnico a informar o número do chamado Vivo.
-
-Atenção!
-
-Material necessário:
-- Notebook - Com sistema operacional Windows 10 ou superior;
-- Software Putty ou similar;
-- Cabo de rede sobressalente;
-- Alicate de crimpar RJ45;
-- Testador de cabo.
-
-Validações:
-- Entrar em contato com o NOC FUST no telefone (11) 3043-1333
-- Manter contato com o NOC para validação das ações.
-
-IMPORTANTE:
-- O técnico deverá deixar o local somente após validação do NOC FUST.
-- Havendo problemas com a liberação de acesso, favor entrar em contato.`;
-
-const destinatarios =
-"email1@empresa.com;email2@empresa.com";
-
-window.location.href =
-`mailto:${destinatarios}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
-
-}
-
-</script>
-
-</body>
-</html>
+<label>ID Vivo</label>
+<input id="idvivo" readonly>

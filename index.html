@@ -7,122 +7,228 @@
     <title>Solicitação de Manutenção FUST</title>
 
     <style>
-        body {
+
+        body{
             font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            max-width:1000px;
+            margin:auto;
+            padding:20px;
+            background: #f5f5f5;
         }
 
-        h1 {
-            color: #0078D4;
+        h1{
+            color:#0078D4;
         }
 
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
+        label{
+            display:block;
+            margin-top:15px;
+            font-weight:bold;
         }
 
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
+        input, textarea{
+            width:100%;
+            padding:10px;
+            box-sizing:border-box;
         }
 
-        textarea {
-            height: 120px;
+        textarea{
+            height:150px;
         }
 
-        button {
-            background: #0078D4;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            margin-top: 15px;
-            cursor: pointer;
-            border-radius: 4px;
+        button{
+            background:#0078D4;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            margin-top:15px;
+            cursor:pointer;
+            border-radius:4px;
         }
 
-        button:hover {
-            background: #005ea6;
+        button:hover{
+            background:#005ea6;
         }
 
-        .readonly {
-            background-color: #e9ecef;
+        .readonly{
+            background:#eeeeee;
         }
 
-        .container {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-        }
     </style>
+
 </head>
 
 <body>
 
-    <div class="container">
+<h1>Solicitação de Manutenção FUST</h1>
 
-        <h1>Solicitação de Manutenção FUST</h1>
+<label>INEP</label>
+<input id="inep" type="text">
 
-        <label>INEP</label>
-        <input id="inep" type="text" placeholder="Digite o INEP">
+<button type="button" onclick="buscarINEP()">
+    Buscar INEP
+</button>
 
-        <button onclick="buscarINEP()">
-            Buscar INEP
-        </button>
+<label>Parceira</label>
+<input id="parceira" class="readonly" readonly>
 
-        <label>Parceira</label>
-        <input id="parceira" readonly class="readonly">
+<label>Escola</label>
+<input id="escola" class="readonly" readonly>
 
-        <label>Escola</label>
-        <input id="escola" readonly class="readonly">
+<label>ID Vivo</label>
+<input id="idvivo" class="readonly" readonly>
 
-        <label>ID Vivo</label>
-        <input id="idvivo" readonly class="readonly">
+<label>Chamado Vivo</label>
+<input id="chamado">
 
-        <label>Chamado Vivo</label>
-        <input id="chamado">
+<label>Descrição da Falha</label>
+<textarea id="falha"></textarea>
 
-        <label>Descrição da Falha</label>
-        <textarea id="falha"></textarea>
+<button type="button" onclick="gerarEmail()">
+    Gerar E-mail
+</button>
 
-        <button onclick="gerarEmail()">
-            Gerar E-mail
-        </button>
+<script>
 
-    </div>
+async function buscarINEP(){
 
-    <script>
+    const inep = document
+        .getElementById("inep")
+        .value
+        .trim();
 
-        let registroAtual = null;
+    if(!inep){
+        alert("Digite o INEP");
+        return;
+    }
 
-        async function buscarINEP() {
+    try{
 
-            const inepDigitado =
-                document.getElementById("inep").value.trim();
+        const resposta =
+            await fetch("./dados.json");
 
-            if (!inepDigitado) {
+        const dados =
+            await resposta.json();
 
-                alert("Digite um INEP.");
+        console.log(dados);
 
-                return;
-            }
+        const registro =
+            dados.find(item =>
+                String(item.INEP) === String(inep)
+            );
 
-            try {
+        if(!registro){
 
-                const response =
-                    await fetch("./dados.json");
+            alert("INEP não encontrado");
 
-                const dados =
-                    await response.json();
+            return;
+        }
 
-                console.log("Dados carregados:", dados);
+        document.getElementById("parceira").value =
+            registro.PARCEIRA;
 
-                registroAtual =
-                    dados.find(item =>
-                        String(item.INEP) === String(inepDigitado)
-             
+        document.getElementById("escola").value =
+            registro.ESCOLA;
+
+        document.getElementById("idvivo").value =
+            registro.ID_VIVO;
+
+    }
+
+    catch(erro){
+
+        console.error(erro);
+
+        alert("Erro ao ler o arquivo dados.json");
+
+    }
+
+}
+
+function gerarEmail(){
+
+    const parceira =
+        document.getElementById("parceira").value;
+
+    const escola =
+        document.getElementById("escola").value;
+
+    const id =
+        document.getElementById("idvivo").value;
+
+    const inep =
+        document.getElementById("inep").value;
+
+    const chamado =
+        document.getElementById("chamado").value;
+
+    const falha =
+        document.getElementById("falha").value;
+
+    const destinatarios = {
+
+        "DELFIA":
+            "delfia@empresa.com",
+
+        "SPREAD":
+            "spread@empresa.com",
+
+        "INELCOM":
+            "inelcom@empresa.com",
+
+        "MAMINFO":
+            "maminfo@empresa.com"
+
+    };
+
+    const emailDestino =
+        destinatarios[
+            parceira.toUpperCase()
+        ] || "";
+
+    const assunto =
+`MANUTENÇÃO - ${parceira} - INEP ${inep} - ${escola} - ID ${id} - CHAMADO ${chamado}`;
+
+    const corpo =
+`Prezados,
+
+Pedimos por gentileza que enviem um Field para verificar os equipamentos da unidade abaixo:
+
+ID VIVO: ${id}
+INEP: ${inep}
+ESCOLA: ${escola}
+CHAMADO VIVO: ${chamado}
+
+Descrição da falha: ${falha}.
+
+Favor orientar o técnico a informar o número do chamado Vivo.
+
+Atenção!
+
+Material necessário:
+- Notebook - Com sistema operacional Windows 10 ou superior;
+- Software Putty ou similar - para acesso à linha de comando;
+- Cabo de rede sobressalente, caso precise refazer infra;
+- Alicate de crimpar RJ45;
+- Testador de cabo.
+
+Validações:
+- Entrar em contato com o NOC FUST no telefone (11) 3043-1333
+- Durante toda a tratativa, manter contato com o NOC para validação das ações.
+
+IMPORTANTE:
+- O técnico deverá deixar o local somente após a validação ou confirmação do NOC FUST.
+- Havendo problemas com a liberação de acesso, favor entrar em contato.`;
+
+    const link =
+        `mailto:${emailDestino}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+
+    window.location.href = link;
+
+}
+
+</script>
+
+</body>
+
+</html>

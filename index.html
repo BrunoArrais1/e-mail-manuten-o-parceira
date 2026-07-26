@@ -9,10 +9,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
             padding: 20px;
-            background: #f5f5f5;
+            background-color: #f5f5f5;
         }
 
         h1 {
@@ -21,7 +21,7 @@
 
         label {
             display: block;
-            margin-top: 12px;
+            margin-top: 15px;
             font-weight: bold;
         }
 
@@ -51,13 +51,13 @@
         }
 
         .readonly {
-            background-color: #eaeaea;
+            background-color: #e9ecef;
         }
 
         .container {
             background: white;
             padding: 25px;
-            border-radius: 8px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -76,16 +76,16 @@
         </button>
 
         <label>Parceira</label>
-        <input id="parceira" class="readonly" readonly>
+        <input id="parceira" readonly class="readonly">
 
         <label>Escola</label>
-        <input id="escola" class="readonly" readonly>
+        <input id="escola" readonly class="readonly">
 
         <label>ID Vivo</label>
-        <input id="idvivo" class="readonly" readonly>
+        <input id="idvivo" readonly class="readonly">
 
         <label>Chamado Vivo</label>
-        <input id="chamado" type="text">
+        <input id="chamado">
 
         <label>Descrição da Falha</label>
         <textarea id="falha"></textarea>
@@ -98,72 +98,31 @@
 
     <script>
 
+        let registroAtual = null;
+
         async function buscarINEP() {
 
-            const inep = document.getElementById("inep").value.trim();
+            const inepDigitado =
+                document.getElementById("inep").value.trim();
 
-            if (!inep) {
-                alert("Informe o INEP");
+            if (!inepDigitado) {
+
+                alert("Digite um INEP.");
+
                 return;
             }
 
             try {
 
-                const resposta = await fetch("dados.json");
+                const response =
+                    await fetch("./dados.json");
 
-                const base = await resposta.json();
+                const dados =
+                    await response.json();
 
-                const registro = base.find(
-                    item => String(item.inep) === String(inep)
-                );
+                console.log("Dados carregados:", dados);
 
-                if (!registro) {
-                    alert("INEP não encontrado.");
-                    return;
-                }
-
-                document.getElementById("parceira").value =
-                    registro.parceira || "";
-
-                document.getElementById("escola").value =
-                    registro.escola || "";
-
-                document.getElementById("idvivo").value =
-                    registro.id || "";
-
-            }
-            catch (erro) {
-
-                console.error(erro);
-
-                alert(
-                    "Erro ao carregar dados.json"
-                );
-
-            }
-
-        }
-
-        function gerarEmail() {
-
-            const parceira =
-                document.getElementById("parceira").value;
-
-            const inep =
-                document.getElementById("inep").value;
-
-            const escola =
-                document.getElementById("escola").value;
-
-            const id =
-                document.getElementById("idvivo").value;
-
-            const chamado =
-                document.getElementById("chamado").value;
-
-            const falha =
-                document.getElementById("falha").value;
-
-            const destinatariosParceira = {
-
-        
+                registroAtual =
+                    dados.find(item =>
+                        String(item.INEP) === String(inepDigitado)
+             

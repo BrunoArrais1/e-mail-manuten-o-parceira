@@ -1,21 +1,169 @@
-<h1>Solicitação de Manutenção FUST</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-<input
-    id="inep"
-    type="text"
-    placeholder="Digite o INEP">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Manutenção FUST</title>
 
-<button onclick="buscarINEP()">
-    Buscar INEP
-</button>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
 
-<br><br>
+        h1 {
+            color: #0078D4;
+        }
 
-<label>Parceira</label>
-<input id="parceira" readonly>
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
 
-<label>Escola</label>
-<input id="escola" readonly>
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-<label>ID Vivo</label>
-<input id="idvivo" readonly>
+        textarea {
+            height: 120px;
+        }
+
+        button {
+            background: #0078D4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #005ea6;
+        }
+
+        .readonly {
+            background-color: #eaeaea;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Solicitação de Manutenção FUST</h1>
+
+        <label>INEP</label>
+        <input id="inep" type="text" placeholder="Digite o INEP">
+
+        <button onclick="buscarINEP()">
+            Buscar INEP
+        </button>
+
+        <label>Parceira</label>
+        <input id="parceira" class="readonly" readonly>
+
+        <label>Escola</label>
+        <input id="escola" class="readonly" readonly>
+
+        <label>ID Vivo</label>
+        <input id="idvivo" class="readonly" readonly>
+
+        <label>Chamado Vivo</label>
+        <input id="chamado" type="text">
+
+        <label>Descrição da Falha</label>
+        <textarea id="falha"></textarea>
+
+        <button onclick="gerarEmail()">
+            Gerar E-mail
+        </button>
+
+    </div>
+
+    <script>
+
+        async function buscarINEP() {
+
+            const inep = document.getElementById("inep").value.trim();
+
+            if (!inep) {
+                alert("Informe o INEP");
+                return;
+            }
+
+            try {
+
+                const resposta = await fetch("dados.json");
+
+                const base = await resposta.json();
+
+                const registro = base.find(
+                    item => String(item.inep) === String(inep)
+                );
+
+                if (!registro) {
+                    alert("INEP não encontrado.");
+                    return;
+                }
+
+                document.getElementById("parceira").value =
+                    registro.parceira || "";
+
+                document.getElementById("escola").value =
+                    registro.escola || "";
+
+                document.getElementById("idvivo").value =
+                    registro.id || "";
+
+            }
+            catch (erro) {
+
+                console.error(erro);
+
+                alert(
+                    "Erro ao carregar dados.json"
+                );
+
+            }
+
+        }
+
+        function gerarEmail() {
+
+            const parceira =
+                document.getElementById("parceira").value;
+
+            const inep =
+                document.getElementById("inep").value;
+
+            const escola =
+                document.getElementById("escola").value;
+
+            const id =
+                document.getElementById("idvivo").value;
+
+            const chamado =
+                document.getElementById("chamado").value;
+
+            const falha =
+                document.getElementById("falha").value;
+
+            const destinatariosParceira = {
+
+        

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Carimbo FUST</title>
+
+<style>
+body { font-family: Segoe UI, Arial, sans-serif; background:#F2F2F2; margin:0; }
+.header { background:#660099; /* Roxo Vivo */; color:white; padding:15px; text-align:center; font-size:20px; font-weight:bold; }
+
+.tabs { display:flex; max-width:700px; margin:10px auto; }
+.tab { flex:1; padding:10px; border:none; cursor:pointer; background:#ccc; font-weight:bold; }
+.tab.active { background:#660099; color:white; }
+
+.container { max-width:700px; margin:20px auto; background:white; padding:25px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+
+label { display:block; margin-top:12px; font-weight:600; color:#333; }
+select, input { width:100%; padding:10px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
+
+button { margin-top:15px; padding:12px; width:100%; border:none; border-radius:5px; font-weight:bold; cursor:pointer; }
+
+.btn-gerar { background:#660099; /* Roxo Vivo */; color:white }
+.btn-copiar { background:#0070C0; /* Azul institucional */; color:white }
+
+textarea { width:100%; height:240px; margin-top:15px; border-radius:5px; border:1px solid #ccc; padding:10px; }
+
+.footer { text-align:center; font-size:11px; color:#777; margin-top:15px; }
+
+.aba { display:none; }
+.ativa { display:block; }
+</style>
+</head>
+
+<body>
+
+<div class="header">Gerador de Carimbo FUST</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="trocarAba('aba1', this)">Carimbo TASK</button>
+  <button class="tab" onclick="trocarAba('aba2', this)">Carimbo Incidente</button>
+</div>
+
+<!-- ABA 1 -->
+<div id="aba1" class="container aba ativa">
+
+<label>Tipo do Carimbo</label>
+<select id="tipo">
+<option>CONCLUIDO</option>
+<option>IMPRODUTIVA</option>
+<option>NÃO RESOLUTIVO</option>
+<option>DUPLICADO/INDEVIDO</option>
+</select>
+
+<label>Pendência</label>
+<select id="pendencia">
+<option>AP</option>
+<option>FW</option>
+<option>SW</option>
+<option>SIMETBOX</option>
+<option>LINK DOWN</option>
+<option>INFRA</option>
+<option>TROCA</option>
+</select>
+
+<label>Status</label>
+<select id="status">
+<option>CONCLUIDO</option>
+<option>CLIENTE_IMPRODUTIVA</option>
+<option>NÃO RESOLUTIVO</option>
+<option>DUPLICADO/INDEVIDO</option>
+</select>
+
+<label>Parceira</label>
+<select id="parceira">
+<option>DELFIA</option>
+<option>INELCOM</option>
+<option>MAMINFO</option>
+<option>SPREAD</option>
+</select>
+
+<label>Motivo</label>
+<select id="motivo">
+<option>CABEAMENTO DESCONECTADO</option>
+<option>CONFIGURAÇÕES</option>
+<option>DESISTENCIA PROJETO FUST</option>
+<option>ENDEREÇO INCORRETO</option>
+<option>ENERGIA ELÉTRICA</option>
+<option>EQUIPAMENTOS DESLIGADOS</option>
+<option>EQUIPAMENTO TRAVADO</option>
+<option>ESCOLA EM REFORMA</option>
+<option>ESCOLA FECHADA</option>
+<option>ESCOLA FECHOU - DEPOIS DAS 16H</option>
+<option>ESTABILIZADOR/NO BREAK</option>
+<option>FALTA DE ENERGIA</option>
+<option>FALTA DE MATERIAIS</option>
+<option>FILTRO DE LINHA</option>
+<option>FURTO/ROUBO</option>
+<option>FUSÃO DE FIBRA</option>
+<option>DUPLICADO/INDEVIDO</option>
+<option>INFRA</option>
+<option>INFRA_CLIENTE</option>
+<option>LIBERAÇÃO NÃO AUTORIZADA</option>
+<option>LINK DOWN</option>
+<option>MASSIVA</option>
+<option>MUDANÇA ENDEREÇO</option>
+<option>NÃO VALIDADO</option>
+<option>NORMALIZADO SEM INTERVENÇÃO</option>
+<option>REBOOT</option>
+<option>REDE EXTERNA</option>
+<option>REMANEJAMENTO</option>
+<option>RESET</option>
+<option>RESPONSÁVEL AUSENTE</option>
+<option>RETIRADA DE EQUIPAMENTOS</option>
+<option>RETIRADA DE EQUIPAMENTOS - RMA</option>  
+<option>TOPOLOGIA</option>
+<option>TOPOLOGIA INCORRETA</option>
+<option>TROCA</option>
+<option>TROCA DE CABEAMENTO</option>
+<option>TROCA DE CONECTOR (RJ-45)</option>
+<option>TROCA DE POWER INJECTOR</option>
+<option>TROCA DO EQUIPAMENTO</option>
+<option>TROCA POE</option>
+</select>
+
+<label>Técnico</label>
+<input id="tecnico" placeholder="Nome do Técnico">
+
+<button class="btn-gerar" onclick="gerarCarimbo()">Gerar Carimbo</button>
+<button class="btn-copiar" onclick="copiar()">Copiar Carimbo</button>
+
+<textarea id="resultado" readonly></textarea>
+
+<div class="footer">Sistema padronizado corporativo • Telefônica</div>
+
+</div>
+
+<!-- ABA 2 -->
+<div id="aba2" class="container aba">
+
+<label>Operadora</label>
+<select id="operadora2">
+<option>VIVO</option>
+<option>PARCEIRA</option>
+</select>
+
+<label>Parceira</label>
+<select id="parceira2">
+<option>DELFIA</option>
+<option>INELCOM</option>
+<option>MAMINFO</option>
+<option>SPREAD</option>
+<option>      </option>
+</select>
+
+<label>Pendência</label>
+<select id="pendencia2">
+<option>AP</option>
+<option>FW</option>
+<option>SW</option>
+<option>LINK</option>
+<option>SIMETBOX</option>
+<option>REMANEJAMENTO</option>
+<option>INFRA</option>
+</select>
+
+<label>Motivo</label>
+<select id="motivo2">
+<option>DOWN</option>
+<option>TROCA</option>
+<option>CONFIGURAÇÃO</option>
+<option>CABEAMENTO</option>
+</select>
+
+<label>Previsão para Reparo</label>
+<input type="date" id="data2">
+
+<button class="btn-gerar" onclick="gerarCarimbo2()">Gerar Carimbo</button>
+<button class="btn-copiar" onclick="copiarCarimbo2()">Copiar Carimbo</button>
+
+<textarea id="resultado2" readonly></textarea>
+
+</div>
+
+<script>
+
+/* ✅ FUNÇÃO CORRETA (SEM DUPLICIDADE, SEM ERRO) */
+function trocarAba(id, el) {
+
+  document.getElementById('aba1').classList.remove('ativa');
+  document.getElementById('aba2').classList.remove('ativa');
+
+  document.getElementById(id).classList.add('ativa');
+
+  var tabs = document.getElementsByClassName('tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('active');
+  }
+
+  el.classList.add('active');
+}
+
+/* CARIMBO 1 */
+function gerarCarimbo(){
+  const tipo = document.getElementById('tipo').value;
+  const pendencia = document.getElementById('pendencia').value;
+  const status = document.getElementById('status').value;
+  const parceira = document.getElementById('parceira').value;
+  const motivo = document.getElementById('motivo').value;
+  const tecnico = document.getElementById('tecnico').value;
+
+  const texto = `TIPO DO CARIMBO: ${tipo}
+PENDÊNCIA: ${pendencia}
+STATUS: ${status}
+PARCEIRA: ${parceira}
+MOTIVO: ${motivo}
+TÉCNICO: ${tecnico}`;
+
+  document.getElementById('resultado').value = texto;
+}
+
+function copiar(){
+  const textarea = document.getElementById('resultado');
+  textarea.select();
+  document.execCommand('copy');
+  alert('Carimbo copiado com sucesso!');
+}
+
+/* CARIMBO 2 */
+function gerarCarimbo2(){
+  const operadora = document.getElementById('operadora2').value;
+  const parceira = document.getElementById('parceira2').value;
+  const pendencia = document.getElementById('pendencia2').value;
+  const motivo = document.getElementById('motivo2').value;
+  const data = document.getElementById('data2').value;
+
+  const texto = `OPERADORA: ${operadora}
+PARCEIRA: ${parceira}
+PENDÊNCIA: ${pendencia}
+MOTIVO: ${motivo}
+PREVISÃO: ${data}`;
+
+  document.getElementById('resultado2').value = texto;
+}
+
+function copiarCarimbo2(){
+  const textarea = document.getElementById('resultado2');
+  textarea.select();
+  document.execCommand('copy');
+  alert('Carimbo copiado com sucesso!');
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Portal Operacional FUST</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f5f5f5;
+    max-width:900px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    margin-top:20px;
+}
+
+a{
+    text-decoration:none;
+    font-size:22px;
+    color:#660099;
+    font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Portal Operacional FUST</h1>
+
+<div class="card">
+    <a hreftml
+        📧 Gerador de E-mail
+    </a>
+</div>
+
+<div class="card">
+    carimbo.html
+        📋 Gerador de Carimbos
+    </a>
+</div>
+
+<div class="card">
+    contatos.html
+        📞 Busca de Contatos
+    </a>
+</div>
+
+</body>
+</html>

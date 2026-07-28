@@ -2,17 +2,89 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Manutenção FUST</title>
 
-<title>Solicitação de Manutenção FUST</title>
+    <style>
 
-<style>
-
-body{
+        body{
     font-family: Arial, sans-serif;
-    background-color:#f5f5f5;
+    background:#f5f5f5;
     margin:0;
+}
+
+.container{
+    max-width:1000px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+header{
+    background:#660099;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+h1{
+    color:#660099;
+    margin-top:0;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+    color:#333;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+}
+
+textarea{
+    height:150px;
+}
+
+button{
+    background:#660099;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    margin-top:15px;
+    cursor:pointer;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#7e1ac7;
+}
+
+.readonly{
+    background:#ececec;
+}
+
+.falhas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.falhas button{
+    width:auto;
 }
 
 .topo{
@@ -32,74 +104,240 @@ body{
 .btn-voltar:hover{
     background:#7e1ac7;
 }
+    </style>
 
-header{
-    background:#660099;
-    color:white;
-    padding:15px;
-    text-align:center;
-    font-size:22px;
-    font-weight:bold;
+</head>
+
+<body>
+
+<div style="margin-bottom:20px;">
+
+    <a href="index.html"
+       style="
+            background:#660099;
+            color:white;
+            text-decoration:none;
+            padding:12px 18px;
+            border-radius:8px;
+            font-weight:bold;
+            display:inline-block;
+       ">
+
+        🏠 Voltar ao Portal
+
+    </a>
+
+</div>
+
+<h1>SOLICITAÇÃO DE MANUTENÇÃO FUST</h1>
+
+<label>INEP</label>
+<input id="inep" type="text">
+
+<button type="button" onclick="buscarINEP()">
+    Buscar INEP
+</button>
+
+<label>Parceira</label>
+<input id="parceira" class="readonly" readonly>
+
+<label>Escola</label>
+<input id="escola" class="readonly" readonly>
+
+<label>ID Vivo</label>
+<input id="idvivo" class="readonly" readonly>
+
+<label>Chamado Vivo</label>
+<input id="chamado">
+
+<label>Falhas Comuns</label>
+
+<div class="falhas";">
+
+<button type="button" onclick="definirFalha('AP-XX Down, favor verificar infra e se houver portas com led laranja, favor corrigir cabos ou conectores.')">AP DOWN</button>
+
+<button type="button" onclick="definirFalha('Necessário verificar a Infra do AP-XX, devido a histório de quedas recorrentes, é necessário verificar se há necessidade de troca de cabeamento ou conectores.')">AP INFRA</button>
+
+<button type="button" onclick="definirFalha('Necessário trocar/substituir o AP-XX que mesmo após procedimentos padrão, equipamento não responde/não aceita reset e permanece travado.')">AP TROCA</button>
+
+<button type="button" onclick="definirFalha('Simetbox sem gerencia, favor verificar se equipamento está ligado e conectado ao FW e corrigir possíveis falhas.')">SIMETBOX DOWN</button>
+
+<button type="button" onclick="definirFalha('Necessário trocar/substituir o Simetbox que mesmo após procedimentos padrão, equipamento não responde/não aceita reset e permanece travado.')">SIMETBOX TROCA</button>
+
+<button type="button" onclick="definirFalha('FW Down, favor verificar infra, bem como se o equipamento está ligado/conectado.')">FW DOWN</button>
+
+<button type="button" onclick="definirFalha('Necessário trocar/substituir o FW que mesmo após procedimentos padrão, equipamento não responde/não aceita reset e permanece travado.')">FW TROCA</button>
+
+<button type="button" onclick="definirFalha('SW Down, favor verificar infra e se houver portas com led laranja, favor corrigir cabos ou conectores.')">SW DOWN</button>
+
+<button type="button" onclick="definirFalha('Necessário trocar/substituir o SW que mesmo após procedimentos padrão, equipamento não responde/não aceita reset e permanece travado.')">SW TROCA</button>
+
+<button type="button" onclick="definirFalha('Equipamentos estão desconectados em nossa gerência, favor verificar se estão ligados corretamente, bem como a infra do local (cabos e conectores).')">EQUIPAMENTOS FORA</button>
+
+<button type="button" onclick="definirFalha('Necessário remanejar equipamentos:')">REMANEJAMENTO</button>
+
+<button type="button" onclick="definirFalha('Necessário verificar/corrigir a infra no local:')">INFRA</button>
+
+</div>
+
+<label>Descrição da Falha</label>
+<textarea id="falha"></textarea>
+
+<button type="button" onclick="gerarEmail()">
+    Gerar E-mail
+</button>
+
+<script>
+
+async function buscarINEP(){
+
+    const inep = document
+        .getElementById("inep")
+        .value
+        .trim();
+
+    if(!inep){
+        alert("Digite o INEP");
+        return;
+    }
+
+    try{
+
+        const resposta =
+            await fetch("./dados.json");
+
+        const dados =
+            await resposta.json();
+
+        console.log(dados);
+
+        const registro =
+            dados.find(item =>
+                String(item.INEP) === String(inep)
+            );
+
+        if(!registro){
+
+            alert("INEP não encontrado");
+
+            return;
+        }
+
+        document.getElementById("parceira").value =
+            registro.PARCEIRA;
+
+        document.getElementById("escola").value =
+            registro.ESCOLA;
+
+        document.getElementById("idvivo").value =
+            registro.ID_VIVO;
+
+    }
+
+    catch(erro){
+
+        console.error(erro);
+
+        alert("Erro ao ler o arquivo dados.json");
+
+    }
+
 }
 
-.container{
-    max-width:1000px;
-    margin:30px auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0px 3px 10px rgba(0,0,0,0.2);
+function definirFalha(texto){
+
+    document.getElementById("falha").value =
+        texto;
+
 }
 
-label{
-    display:block;
-    margin-top:12px;
-    font-weight:600;
-    color:#333;
+function gerarEmail(){
+
+    const parceira =
+        document.getElementById("parceira").value;
+
+    const escola =
+        document.getElementById("escola").value;
+
+    const id =
+        document.getElementById("idvivo").value;
+
+    const inep =
+        document.getElementById("inep").value;
+
+    const chamado =
+        document.getElementById("chamado").value;
+
+    const falha =
+        document.getElementById("falha").value;
+
+    const destinatarios = {
+
+        "DELFIA":
+            "heitor.rodrigues@delfia.tech",
+
+        "SPREAD":
+            "operacaovivofust@spread.com.br;gabriel.qsantos@spread.com.br;marques.cruz@spread.com.br",
+
+        "INELCOM":
+            "sustentacao_fust@inelcom.com.br;jceballos@inelcom.es;leopoldo.rodrigues@inelcom.com.br",
+
+        "MAMINFO":
+            "atendimento@maminfo.com.br",
+
+    };
+
+    const emailDestino =
+        destinatarios[
+            parceira.toUpperCase()
+        ] || "";
+
+    const assunto =
+`MANUTENÇÃO - ${parceira} - INEP ${inep} - ${escola} - ID ${id} - CHAMADO ${chamado}`;
+
+    const corpo =
+`Prezados,
+
+Pedimos por gentileza que enviem um Field para verificar os equipamentos da unidade abaixo:
+
+ID VIVO: ${id}
+INEP: ${inep}
+ESCOLA: ${escola}
+CHAMADO VIVO: ${chamado}
+
+Descrição da falha: ${falha}.
+
+Favor orientar o técnico a informar o número do chamado Vivo.
+
+Atenção!
+
+Material necessário:
+- Notebook - Com sistema operacional Windows 10 ou superior;
+- Software Putty ou similar - para acesso à linha de comando;
+- Cabo de rede sobressalente, caso precise refazer infra;
+- Alicate de crimpar RJ45;
+- Testador de cabo.
+
+Validações:
+- Entrar em contato com o NOC FUST no telefone (11) 3043-1333
+- Durante toda a tratativa, manter contato com o NOC para validação das ações.
+
+IMPORTANTE:
+- O técnico deverá deixar o local somente após a validação ou confirmação do NOC FUST.
+- Havendo problemas com a liberação de acesso, favor entrar em contato.`;
+
+const copia =
+    "noc_fust.br@telefonica.com";
+
+const link =
+`mailto:${emailDestino}?cc=${encodeURIComponent(copia)}&subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+
+window.location.href = link;
+
 }
 
-input,
-textarea{
-    width:100%;
-    padding:10px;
-    margin-top:5px;
-    border-radius:6px;
-    border:1px solid #ccc;
-    box-sizing:border-box;
-}
+</script>
 
-textarea{
-    height:150px;
-}
+</body>
 
-button{
-    background:#660099;
-    color:white;
-    border:none;
-    border-radius:6px;
-    padding:10px 15px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#7e1ac7;
-}
-
-.readonly{
-    background:#ececec;
-}
-
-.botoes-falha{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:10px;
-}
-
-.botoes-falha button{
-    width:auto;
-}
-
-.resultado{
-    margin
+</html>

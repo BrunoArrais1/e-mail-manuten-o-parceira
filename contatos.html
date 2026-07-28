@@ -153,11 +153,161 @@
     </div>
 </div>
 
-<!-- Excel -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script>
 
-<!-- Seu JS -->
-<script src="./script-contatos.js"></script>
+let baseMunicipio = [];
+let baseINEP = [];
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    try {
+
+        const municipiosResp =
+            await fetch("./municipios.json");
+
+        baseMunicipio =
+            await municipiosResp.json();
+
+        const inepResp =
+            await fetch("./inep.json");
+
+        baseINEP =
+            await inepResp.json();
+
+        carregarMunicipios();
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert("Erro ao carregar as bases JSON");
+
+    }
+
+});
+
+function carregarMunicipios() {
+
+    let select =
+        document.getElementById("municipio");
+
+    select.innerHTML =
+        '<option value="">Selecione o município</option>';
+
+    let municipios =
+        [...new Set(
+            baseMunicipio.map(x => x["MUNICIPIO"])
+        )];
+
+    municipios.sort();
+
+    municipios.forEach(m => {
+
+        let option =
+            document.createElement("option");
+
+        option.value = m;
+        option.textContent = m;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+function mostrarAba(tipo) {
+
+    let abaMun =
+        document.getElementById("abaMunicipio");
+
+    let abaInep =
+        document.getElementById("abaINEP");
+
+    let btnMun =
+        document.getElementById("btnMun");
+
+    let btnInep =
+        document.getElementById("btnInep");
+
+    if(tipo === "mun") {
+
+        abaMun.style.display = "block";
+        abaInep.style.display = "none";
+
+        btnMun.classList.add("active");
+        btnInep.classList.remove("active");
+
+    } else {
+
+        abaMun.style.display = "none";
+        abaInep.style.display = "block";
+
+        btnMun.classList.remove("active");
+        btnInep.classList.add("active");
+
+    }
+
+}
+
+function buscarMunicipio() {
+
+    let municipio =
+        document.getElementById("municipio").value;
+
+    let registro =
+        baseMunicipio.find(
+            x => x["MUNICIPIO"] === municipio
+        );
+
+    let div =
+        document.getElementById("resMun");
+
+    if (!registro) {
+
+        div.innerHTML =
+            "Município não localizado.";
+
+        return;
+    }
+
+    div.innerHTML = `
+        <b>Secretário:</b> ${registro["SECRETARIO"]}<br>
+        <b>Email:</b> ${registro["E-MAIL"]}
+    `;
+
+}
+
+function buscarINEP() {
+
+    let inep =
+        document.getElementById("inep").value.trim();
+
+    let registro =
+        baseINEP.find(
+            x => String(x["INEP"]) === String(inep)
+        );
+
+    let div =
+        document.getElementById("resINEP");
+
+    if (!registro) {
+
+        div.innerHTML =
+            "INEP não localizado.";
+
+        return;
+    }
+
+    div.innerHTML = `
+        <b>Nome da Escola:</b> ${registro["NOME ESCOLA"]}<br>
+        <b>Responsável:</b> ${registro["NOME RESPONSÁVEL"]}<br>
+        <b>Email:</b> ${registro["EMAIL INSTITUICAO"]}<br>
+        <b>Telefone:</b> ${registro["TELEFONE INSTITUIÇÃO"]}
+    `;
+
+}
+
+</script>
 
 </body>
 </html>

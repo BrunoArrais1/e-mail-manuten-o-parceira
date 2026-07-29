@@ -66,6 +66,9 @@ textarea{
     max-width:600px;
     margin:auto;
     display:block;
+    height:50px;
+    padding:12px;
+    font-size:16px;
 }
 
 textarea{
@@ -126,6 +129,25 @@ button:hover{
 .btn-voltar:hover{
     background:#7e1ac7;
 }
+.linha-inep{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.linha-inep input{
+    max-width:600px;
+    margin:0;
+}
+
+.btn-buscar{
+    width:180px;
+    height:50px;
+    margin:0;
+    flex-shrink:0;
+}
     </style>
 
 </head>
@@ -155,12 +177,18 @@ button:hover{
         
 <div class="busca-inep">
 
-    <label>INEP</label>
+<label>INEP</label>
+
+<div class="linha-inep">
 
     <input id="inep" type="text">
 
-    <button type="button" onclick="buscarINEP()">
+    <button class="btn-buscar"
+            type="button"
+            onclick="buscarINEP()">
+
         Buscar INEP
+
     </button>
 
 </div>

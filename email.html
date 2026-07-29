@@ -7,7 +7,52 @@
     <title>Solicitação de Manutenção FUST</title>
 
     <style>
+/* Tema Claro */
 
+body{
+    background:#f5f5f5;
+    color:#333;
+}
+
+.container{
+    background:white;
+}
+
+/* Tema Escuro */
+
+body.dark{
+    background:#1e1e1e;
+    color:white;
+}
+
+body.dark .container{
+    background:#2b2b2b;
+}
+
+body.dark input,
+body.dark textarea{
+    background:#3a3a3a;
+    color:white;
+    border:1px solid #555;
+}
+
+body.dark label{
+    color:white;
+}
+
+body.dark .readonly{
+    background:#444;
+}
+
+body.dark #textoPortal{
+    background:#3a3a3a;
+    color:white;
+}
+
+body.dark .btn-voltar,
+body.dark button{
+    background:#7e1ac7;
+}
 .area-final{
     display:flex;
     flex-direction:column;
@@ -186,6 +231,10 @@ button:hover{
        font-weight:bold;">
        🏠 Voltar ao Portal
 
+    <button id="temaBtn" onclick="alternarTema()">
+    🌙 Modo Escuro
+</button>
+        
     </a>
 
 </div>
@@ -572,7 +621,41 @@ IMPORTANTE:
     );
 
 }
-    
+ function alternarTema(){
+
+    document.body.classList.toggle("dark");
+
+    const escuro =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "tema",
+        escuro ? "dark" : "light"
+    );
+
+    document.getElementById("temaBtn").innerHTML =
+        escuro
+        ? "☀️ Modo Claro"
+        : "🌙 Modo Escuro";
+
+}
+
+window.addEventListener("load", () => {
+
+    const tema =
+        localStorage.getItem("tema");
+
+    if(tema === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("temaBtn")
+            .innerHTML =
+            "☀️ Modo Claro";
+
+    }
+
+});   
 </script>
 
 </body>

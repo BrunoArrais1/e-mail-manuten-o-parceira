@@ -9,13 +9,15 @@
     <style>
 
         .area-final{
-    text-align:center;
-    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:30px;
 }
 
 .area-final textarea{
-    width:700px;
-    max-width:100%;
+    width:100%;
+    max-width:900px;
     margin:auto;
     display:block;
 }
@@ -31,7 +33,7 @@
 }
 
 .container{
-    max-width:8000px;
+    max-width:12000px;
     margin:30px auto;
     background:white;
     padding:30px;
@@ -171,7 +173,7 @@ button:hover{
 
 <label>Falhas Comuns</label>
 
-<div class="falhas";">
+<div class="falhas">
 
 <button type="button" onclick="definirFalha('AP-XX Down, favor verificar infra e se houver portas com led laranja, favor corrigir cabos ou conectores.')">AP DOWN</button>
 
@@ -196,6 +198,8 @@ button:hover{
 <button type="button" onclick="definirFalha('Necessário remanejar equipamentos:')">REMANEJAMENTO</button>
 
 <button type="button" onclick="definirFalha('Necessário verificar/corrigir a infra no local:')">INFRA</button>
+
+</div>
 
 <div class="area-final">
 

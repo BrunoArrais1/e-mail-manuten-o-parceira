@@ -181,11 +181,47 @@ input{
     margin:auto;
     display:block;
 }
-    
+.tema-container{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:1000;
+}
+
+#temaBtn{
+    width:170px;
+    height:48px;
+    background:#660099;
+    color:white;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 3px 8px rgba(0,0,0,.25);
+    margin:0;
+}
+
+#temaBtn:hover{
+    background:#7e1ac7;
+}    
 </style>
 </head>
 
 <body>
+
+<div class="tema-container">
+
+    <button id="temaBtn"
+            onclick="alternarTema()">
+
+        🌙 Modo Escuro
+
+    </button>
+
+</div>
+
+<div style="padding:15px;">
 
 <div style="padding:15px;">
     <a href="index.html"
@@ -198,10 +234,6 @@ input{
        font-weight:bold;">
        🏠 Voltar ao Portal
     </a>
-    
-<button id="temaBtn" onclick="alternarTema()">
-    🌙 Modo Escuro
-</button>
     
 </div>
 

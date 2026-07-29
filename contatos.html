@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,84 +10,9 @@
 <style>
 
 body{
-    font-family: Arial, sans-serif;
+    font-family:Arial, sans-serif;
     background:#f5f5f5;
     margin:0;
-}
-
-header{
-    background:#660099;
-    color:white;
-    padding:15px;
-    text-align:center;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.container{
-    max-width:700px;
-    margin:40px auto;
-}
-
-.box{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0px 3px 10px rgba(0,0,0,.2);
-}
-
-h3{
-    color:#660099;
-}
-
-select,
-input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border-radius:6px;
-    border:1px solid #ccc;
-    box-sizing:border-box;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:#660099;
-    color:white;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#7e1ac7;
-}
-
-.tabs{
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.tabs button{
-    flex:1;
-    background:#ddd;
-    color:black;
-}
-
-.tabs button.active{
-    background:#660099;
-    color:white;
-}
-
-.resultado{
-    margin-top:15px;
-    background:#f0e6ff;
-    padding:15px;
-    border-radius:8px;
-    text-align:left;
 }
 
 .topo{
@@ -109,25 +33,104 @@ button:hover{
     background:#7e1ac7;
 }
 
-#abaINEP{
+header{
+    background:#660099;
+    color:white;
     text-align:center;
+    padding:18px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1000px;
+    margin:30px auto;
+}
+
+.box{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.tabs button{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.tabs button.active{
+    background:#660099;
+    color:white;
+}
+
+.tabs button:not(.active){
+    background:#ddd;
+    color:black;
+}
+
+h3{
+    color:#660099;
+}
+
+select,
+input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+    margin-top:10px;
 }
 
 .campo-inep{
-    width:600px;
+    width:500px;
     max-width:100%;
     margin:auto;
     display:block;
 }
 
-.btn-buscar{
+.btn-busca{
     width:220px;
     margin:15px auto;
     display:block;
+    background:#660099;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-busca:hover{
+    background:#7e1ac7;
+}
+
+.resultado{
+    margin-top:20px;
+    background:#f0e6ff;
+    padding:20px;
+    border-radius:10px;
+    line-height:1.8;
+}
+
+#abaINEP{
+    text-align:center;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -141,4 +144,233 @@ button:hover{
 </div>
 
 <header>
-    BUSCA - CONTATOS
+    BUSCA DE CONTATOS FUST
+</header>
+
+<div class="container">
+
+<div class="box">
+
+    <div class="tabs">
+
+        <button id="btnMun"
+                class="active"
+                onclick="mostrarAba('mun')">
+
+            Município
+
+        </button>
+
+        <button id="btnInep"
+                onclick="mostrarAba('inep')">
+
+            INEP
+
+        </button>
+
+    </div>
+
+    <!-- MUNICÍPIO -->
+
+    <div id="abaMunicipio">
+
+        <h3>Buscar por Município</h3>
+
+        <select id="municipio">
+            <option>Carregando municípios...</option>
+        </select>
+
+        <button class="btn-busca"
+                onclick="buscarMunicipio()">
+
+            Buscar
+
+        </button>
+
+        <div id="resMun"
+             class="resultado">
+
+        </div>
+
+    </div>
+
+    <!-- INEP -->
+
+    <div id="abaINEP"
+         style="display:none;">
+
+        <h3>Buscar por INEP</h3>
+
+        <input
+            id="inep"
+            class="campo-inep"
+            placeholder="Digite o código INEP">
+
+        <button class="btn-busca"
+                onclick="buscarINEP()">
+
+            Buscar
+
+        </button>
+
+        <div id="resINEP"
+             class="resultado">
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+let baseMunicipio = [];
+let baseINEP = [];
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    try {
+
+        const municipios =
+            await fetch("./municipios.json");
+
+        baseMunicipio =
+            await municipios.json();
+
+        const inep =
+            await fetch("./inep.json");
+
+        baseINEP =
+            await inep.json();
+
+        carregarMunicipios();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert("Erro ao carregar as bases JSON.");
+
+    }
+
+});
+
+function mostrarAba(tipo){
+
+    document.getElementById("abaMunicipio")
+        .style.display =
+        tipo === "mun" ? "block" : "none";
+
+    document.getElementById("abaINEP")
+        .style.display =
+        tipo === "inep" ? "block" : "none";
+
+    document.getElementById("btnMun")
+        .classList.toggle("active",
+        tipo === "mun");
+
+    document.getElementById("btnInep")
+        .classList.toggle("active",
+        tipo === "inep");
+
+}
+
+function carregarMunicipios(){
+
+    const select =
+        document.getElementById("municipio");
+
+    select.innerHTML =
+        '<option value="">Selecione um município</option>';
+
+    const municipios =
+        [...new Set(
+            baseMunicipio.map(
+                x => x["MUNICIPIO"]
+            )
+        )].sort();
+
+    municipios.forEach(municipio => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            municipio;
+
+        option.textContent =
+            municipio;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+function buscarMunicipio(){
+
+    const municipio =
+        document.getElementById("municipio").value;
+
+    const registro =
+        baseMunicipio.find(
+            x => x["MUNICIPIO"] === municipio
+        );
+
+    const resultado =
+        document.getElementById("resMun");
+
+    if(!registro){
+
+        resultado.innerHTML =
+            "Município não localizado.";
+
+        return;
+    }
+
+    resultado.innerHTML = `
+        <b>Secretário:</b> ${registro["SECRETARIO"]}<br>
+        <b>Email:</b> ${registro["E-MAIL"]}
+    `;
+
+}
+
+function buscarINEP(){
+
+    const inep =
+        document.getElementById("inep")
+        .value
+        .trim();
+
+    const registro =
+        baseINEP.find(
+            x => String(x["INEP"]) === String(inep)
+        );
+
+    const resultado =
+        document.getElementById("resINEP");
+
+    if(!registro){
+
+        resultado.innerHTML =
+            "INEP não localizado.";
+
+        return;
+    }
+
+    resultado.innerHTML = `
+        <b>Nome da Escola:</b> ${registro["NOME ESCOLA"]}<br>
+        <b>Responsável:</b> ${registro["NOME RESPONSÁVEL"]}<br>
+        <b>Email:</b> ${registro["EMAIL INSTITUICAO"]}<br>
+        <b>Telefone:</b> ${registro["TELEFONE INSTITUIÇÃO"]}
+    `;
+
+}
+
+</script>
+
+</body>
+</html>

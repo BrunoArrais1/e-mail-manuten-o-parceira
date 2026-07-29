@@ -52,6 +52,36 @@ body.dark .btn-voltar,
 body.dark button{
     background:#7e1ac7;
 }
+body.dark .header{
+    background:#660099;
+    color:white;
+}
+
+body.dark .tab:not(.active){
+    background:#444;
+    color:white;
+}
+
+body.dark .container{
+    background:#2b2b2b;
+}
+
+body.dark textarea{
+    background:#3a3a3a;
+    color:white;
+    border:1px solid #555;
+}
+
+body.dark select,
+body.dark input{
+    background:#3a3a3a;
+    color:white;
+    border:1px solid #555;
+}
+
+body.dark .footer{
+    color:#ccc;
+}
 body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; }
 .header { background:#660099; /* Roxo Vivo */; color:white; padding:15px; text-align:center; font-size:20px; font-weight:bold; margin-bottom:20px}
 
@@ -78,10 +108,74 @@ textarea { width:100%; height:240px; margin-top:15px; border-radius:5px; border:
 
 .aba { display:none; }
 .ativa { display:block; }
+.topo{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    padding:15px;
+}
+
+.btn-voltar,
+.btn-tema{
+    background:#660099;
+    color:white;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+}
+
+.btn-voltar:hover,
+.btn-tema:hover{
+    background:#7e1ac7;
+}
+.topo{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    padding:15px;
+}
+.tema-container{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:1000;
+}
+
+#temaBtn{
+    width:170px;
+    height:48px;
+    background:#660099;
+    color:white;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+    box-shadow:0 3px 8px rgba(0,0,0,.25);
+    margin:0;
+}
+
+#temaBtn:hover{
+    background:#7e1ac7;
+}
 </style>
 </head>
 
 <body>
+
+<div class="tema-container">
+
+    <button id="temaBtn"
+            onclick="alternarTema()">
+
+        🌙 Modo Escuro
+
+    </button>
+
+</div>
 
 <div style="padding:15px;">
     <a href="index.html"
@@ -95,12 +189,6 @@ textarea { width:100%; height:240px; margin-top:15px; border-radius:5px; border:
        🏠 Voltar ao Portal
     </a>
     
-    <button id="temaBtn" onclick="alternarTema()">
-    🌙 Modo Escuro
-</button>
-    
-</div>
-
 <div class="header">Gerador de Carimbo FUST</div>
 
 <div class="tabs">

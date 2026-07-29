@@ -43,7 +43,38 @@ h1{
     font-weight:bold;
     display:block;
 }
+#temaBtn{
+    background:#660099;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
+#temaBtn:hover{
+    background:#7e1ac7;
+}
+
+/* TEMA ESCURO */
+
+body.dark{
+    background:#1e1e1e;
+    color:white;
+}
+
+body.dark h1{
+    color:white;
+}
+
+body.dark .card{
+    background:#2b2b2b;
+}
+
+body.dark .card a{
+    color:white;
+}
 </style>
 
 </head>
@@ -53,6 +84,12 @@ h1{
 <div class="container">
 
 <h1>Portal Operacional FUST</h1>
+
+<div style="text-align:center; margin-bottom:20px;">
+    <button id="temaBtn" onclick="alternarTema()">
+        🌙 Modo Escuro
+    </button>
+</div>
 
 <div class="card">
     <a href="email.html">
@@ -73,7 +110,44 @@ h1{
 </div>
 
 </div>
+<script>
 
+function alternarTema(){
+
+    document.body.classList.toggle("dark");
+
+    const escuro =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "tema",
+        escuro ? "dark" : "light"
+    );
+
+    document.getElementById("temaBtn").innerHTML =
+        escuro
+        ? "☀️ Modo Claro"
+        : "🌙 Modo Escuro";
+
+}
+
+window.onload = function(){
+
+    const tema =
+        localStorage.getItem("tema");
+
+    if(tema === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("temaBtn").innerHTML =
+            "☀️ Modo Claro";
+
+    }
+
+};
+
+</script>
 </body>
 
 </html>

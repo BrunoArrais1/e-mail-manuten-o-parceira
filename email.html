@@ -62,7 +62,7 @@ label{
 
 input{
     width:100%;
-    max-width:600px;
+    max-width:780px;
     margin:auto;
     display:block;
     padding:10px;
@@ -96,7 +96,7 @@ button:hover{
 
 .readonly,
 #chamado{
-    max-width:600px;
+    max-width:780px;
 }
 
 .falhas{
@@ -135,17 +135,14 @@ button:hover{
 }
 .linha-inep{
     display:flex;
-    justify-content:center;
-    align-items:center;
     gap:15px;
-    max-width:780px;
+    max-width:980px;
     margin:auto;
 }
 
 .linha-inep input{
-    width:585px;
-    max-width:585px;
-    margin:0;
+    flex:1;
+    max-width:none;
 }
 
 .btn-buscar{
@@ -258,7 +255,8 @@ button:hover{
     </button>
 
 </div>
-
+</div>
+    
 <script>
 
 async function buscarINEP(){

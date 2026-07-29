@@ -22,7 +22,18 @@
     resize:vertical;
 }
 
+.acoes{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
 
+.btn-gerar{
+    min-width:180px;
+}
+        
 .area-final label{
     text-align:center;
 }
@@ -244,11 +255,29 @@ button:hover{
 
     <br>
 
+<div class="acoes">
+
     <button class="btn-gerar"
             type="button"
             onclick="gerarEmail()">
 
-        Gerar E-mail
+        📧 Gerar E-mail
+
+    </button>
+
+    <button class="btn-gerar"
+            type="button"
+            onclick="gerarTexto()">
+
+        📋 Gerar Texto
+
+    </button>
+
+    <button class="btn-gerar"
+            type="button"
+            onclick="abrirPortal()">
+
+        🌐 Abrir Portal
 
     </button>
 
@@ -403,11 +432,13 @@ IMPORTANTE:
 - O técnico deverá deixar o local somente após a validação ou confirmação do NOC FUST.
 - Havendo problemas com a liberação de acesso, favor entrar em contato.`;
     
-if (portais[parceira.toUpperCase()]) {
+if (
+    parceira.toUpperCase() === "DELFIA" ||
+    parceira.toUpperCase() === "MAMINFO"
+){
 
-    window.open(
-        portais[parceira.toUpperCase()],
-        "_blank"
+    alert(
+        "Esta parceira utiliza Portal. Utilize o botão 🌐 Abrir Portal."
     );
 
     return;
@@ -421,6 +452,83 @@ const link =
 `mailto:${emailDestino}?cc=${encodeURIComponent(copia)}&subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
 
 window.location.href = link;
+
+}
+function abrirPortal(){
+
+    const parceira =
+        document
+        .getElementById("parceira")
+        .value
+        .toUpperCase();
+
+    const portais = {
+
+        "DELFIA":
+        "https://delfia.atlassian.net/servicedesk/customer/portal/2117/group/2453/create/3574",
+
+        "MAMINFO":
+        "https://mamerp.maminfo.com.br/chamados/abertura-chamados"
+
+    };
+
+    if(portais[parceira]){
+
+        window.open(
+            portais[parceira],
+            "_blank"
+        );
+
+    }else{
+
+        alert(
+            "Esta parceira utiliza acionamento por e-mail."
+        );
+
+    }
+
+}
+
+function gerarTexto(){
+
+    const parceiro =
+        document.getElementById("parceira").value;
+
+    const escola =
+        document.getElementById("escola").value;
+
+    const id =
+        document.getElementById("idvivo").value;
+
+    const inep =
+        document.getElementById("inep").value;
+
+    const chamado =
+        document.getElementById("chamado").value;
+
+    const falha =
+        document.getElementById("falha").value;
+
+    const texto = `
+
+ID VIVO: ${id}
+INEP: ${inep}
+ESCOLA: ${escola}
+CHAMADO VIVO: ${chamado}
+
+PARCEIRA: ${parceiro}
+
+DESCRIÇÃO DA FALHA:
+
+${falha}
+
+`;
+
+    navigator.clipboard.writeText(texto);
+
+    alert(
+        "Texto copiado para a área de transferência."
+    );
 
 }
     

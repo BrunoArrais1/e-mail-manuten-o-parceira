@@ -8,7 +8,7 @@
 
     <style>
 
-        .area-final{
+.area-final{
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -17,10 +17,11 @@
 
 .area-final textarea{
     width:100%;
-    max-width:900px;
-    margin:auto;
-    display:block;
+    max-width:100%;
+    min-height:220px;
+    resize:vertical;
 }
+
 
 .area-final label{
     text-align:center;
@@ -55,7 +56,6 @@ label{
     display:block;
     margin-top:15px;
     margin-bottom:5px;
-    text-align:center;
     font-weight:bold;
     color:#333;
 }
@@ -63,8 +63,6 @@ label{
 input{
     width:100%;
     max-width:780px;
-    margin:auto;
-    display:block;
     padding:10px;
     font-size:16px;
     border-radius:6px;
@@ -136,8 +134,7 @@ button:hover{
 .linha-inep{
     display:flex;
     gap:15px;
-    max-width:980px;
-    margin:auto;
+    align-items:center;
 }
 
 .linha-inep input{
@@ -190,7 +187,7 @@ button:hover{
             type="button"
             onclick="buscarINEP()">
 
-        Buscar INEP
+        Buscar
 
     </button>
 

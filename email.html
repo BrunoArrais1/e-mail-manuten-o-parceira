@@ -125,7 +125,7 @@ button:hover{
 }
 
 .busca-inep{
-    text-align:center;
+    text-align:left;
 }
         
 .btn-voltar:hover{
@@ -134,7 +134,7 @@ button:hover{
 .linha-inep{
     display:flex;
     gap:15px;
-    align-items:center;
+    align-items:left;
 }
 
 .linha-inep input{
@@ -177,25 +177,26 @@ button:hover{
         
 <div class="busca-inep">
 
-<label>INEP</label>
+    <label>INEP</label>
 
-<div class="linha-inep">
+    <div class="linha-inep">
 
-    <input id="inep" type="text">
+        <input id="inep" type="text">
 
-    <button class="btn-buscar"
-            type="button"
-            onclick="buscarINEP()">
+        <button class="btn-buscar"
+                type="button"
+                onclick="buscarINEP()">
 
-        Buscar
+            Buscar
 
-    </button>
+        </button>
+
+    </div>
 
 </div>
 
 <label>Parceira</label>
 <input id="parceira" class="readonly" readonly>
-
 <label>Escola</label>
 <input id="escola" class="readonly" readonly>
 

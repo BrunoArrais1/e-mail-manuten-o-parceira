@@ -323,6 +323,15 @@ function gerarEmail(){
 
     const parceira =
         document.getElementById("parceira").value;
+    const portais = {
+
+    "DELFIA":
+        "https://delfia.atlassian.net/servicedesk/customer/portal/2117/group/2453/create/3574",
+
+    "MAMINFO":
+        "https://mamerp.maminfo.com.br/chamados/abertura-chamados"
+
+};
 
     const escola =
         document.getElementById("escola").value;
@@ -393,7 +402,18 @@ Validações:
 IMPORTANTE:
 - O técnico deverá deixar o local somente após a validação ou confirmação do NOC FUST.
 - Havendo problemas com a liberação de acesso, favor entrar em contato.`;
+    
+if (portais[parceira.toUpperCase()]) {
 
+    window.open(
+        portais[parceira.toUpperCase()],
+        "_blank"
+    );
+
+    return;
+
+}
+    
 const copia =
     "noc_fust.br@telefonica.com";
 

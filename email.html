@@ -87,8 +87,9 @@ button:hover{
     background:#7e1ac7;
 }
 
-.readonly{
-    background:#ececec;
+.readonly,
+#chamado{
+    max-width:600px;
 }
 
 .falhas{
@@ -118,6 +119,10 @@ button:hover{
     display:inline-block;
 }
 
+.busca-inep{
+    text-align:center;
+}
+        
 .btn-voltar:hover{
     background:#7e1ac7;
 }
@@ -148,12 +153,17 @@ button:hover{
     
 <div class="container">
         
-<label>INEP</label>
-<input id="inep" type="text">
+<div class="busca-inep">
 
-<button type="button" onclick="buscarINEP()">
-    Buscar INEP
-</button>
+    <label>INEP</label>
+
+    <input id="inep" type="text">
+
+    <button type="button" onclick="buscarINEP()">
+        Buscar INEP
+    </button>
+
+</div>
 
 <label>Parceira</label>
 <input id="parceira" class="readonly" readonly>

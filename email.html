@@ -637,7 +637,7 @@ function gerarTexto(){
 const assunto =
 `MANUTENÇÃO - ${parceiro} - INEP ${inep} - ${escola} - ID ${id} - CHAMADO ${chamado}`;
 
-const texto = 'Prezados,
+const texto = `Prezados,
 
 Pedimos por gentileza que enviem um Field para verificar os equipamentos da unidade abaixo:
 
@@ -668,8 +668,7 @@ Validações:
 IMPORTANTE:
 - O técnico deverá deixar o local somente após validação do NOC FUST.
 `;
-
-
+``
     document.getElementById("resumoManutencao").value =
 assunto;
 

@@ -321,7 +321,7 @@ button:hover{
 <label>ID Vivo</label>
 <input id="idvivo" class="readonly" readonly>
 
-<label>Chamado Vivo</label>
+<label>Chamado Vivo <span style="color:red">*</span></label>
 <input id="chamado">
 
 <label>Falhas Comuns</label>
@@ -452,6 +452,22 @@ async function buscarINEP(){
     }
 
 }
+function validarChamado(){
+
+    const chamado =
+        document.getElementById("chamado").value.trim();
+
+    if(!chamado){
+
+        alert("Preencha o campo Chamado Vivo.");
+
+        document.getElementById("chamado").focus();
+
+        return false;
+    }
+
+    return true;
+}
 
 function definirFalha(texto){
 
@@ -461,6 +477,10 @@ function definirFalha(texto){
 }
 
 function gerarEmail(){
+
+    if(!validarChamado()){
+        return;
+    }
 
     const parceira =
         document.getElementById("parceira").value;
@@ -600,15 +620,17 @@ function abrirPortal(){
     }
 
 }
-
 function gerarTexto(){
+
+    if(!validarChamado()){
+        return;
+    }
 
     const parceiro =
         document.getElementById("parceira").value;
 
     const escola =
         document.getElementById("escola").value;
-
     const id =
         document.getElementById("idvivo").value;
 

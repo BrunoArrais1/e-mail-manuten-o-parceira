@@ -44,7 +44,8 @@ body.dark .readonly{
     background:#444;
 }
 
-body.dark #textoPortal{
+body.dark #textoPortal,
+body.dark #resumoManutencao{
     background:#3a3a3a;
     color:white;
 }
@@ -260,6 +261,25 @@ button:hover{
 .btn-tema:hover{
     background:#7e1ac7;
 }
+#resumoManutencao{
+    width:100%;
+    min-height:80px;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+    background:#f5f5f5;
+}
+
+#textoPortal{
+    width:100%;
+    min-height:120px;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+    background:#f5f5f5;
+}
     </style>
 
 </head>
@@ -353,8 +373,10 @@ button:hover{
 
     <textarea id="falha"></textarea>
 
-    <label>Texto para Portal</label>
+<label>Resumo Manutenção</label>
+<textarea id="resumoManutencao" readonly></textarea>
 
+<label>Texto Portal</label>
 <textarea id="textoPortal" readonly></textarea>
     <br>
 
@@ -615,9 +637,7 @@ function gerarTexto(){
 const assunto =
 `MANUTENÇÃO - ${parceiro} - INEP ${inep} - ${escola} - ID ${id} - CHAMADO ${chamado}`;
 
-const texto = `${assunto}
-
-----------------------------------------------------
+const texto =
 
 Prezados,
 
@@ -652,8 +672,11 @@ IMPORTANTE:
 `;
 
 
+    document.getElementById("resumoManutencao").value =
+assunto;
+
     document.getElementById("textoPortal").value =
-    texto;
+texto;
     
     navigator.clipboard.writeText(texto);
 

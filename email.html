@@ -160,18 +160,26 @@ button:hover{
 }
 
 .falhas{
-    display:flex;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(6, 150px);
     gap:12px;
     justify-content:center;
-    max-width:800px;
     margin:auto;
 }
 
 .falhas button{
-    width:auto;
-}
+    width:150px;
+    height:55px;
+    margin:0;
 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    font-size:14px;
+    font-weight:bold;
+}
 .topo{
     display:flex;
     justify-content:space-between;

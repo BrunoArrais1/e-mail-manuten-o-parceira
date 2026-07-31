@@ -380,7 +380,7 @@ function gerarCarimbo2(){
   const parceira = document.getElementById('parceira2').value;
   const pendencia = document.getElementById('pendencia2').value;
   const motivo = document.getElementById('motivo2').value;
-  const data = document.getElementById('data2').value;
+  const data = document.getElementById('data2').value || "SEM PREVISÃO";
 
   const texto = `OPERADORA: ${operadora}
 PARCEIRA: ${parceira}

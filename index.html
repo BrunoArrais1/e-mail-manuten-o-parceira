@@ -19,7 +19,27 @@ h1{
     color:#660099;
 }
 
-.container{
+.portal-layout{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:80px;
+    margin-top:30px;
+}
+
+.coluna-esquerda{
+    display:flex;
+    flex-direction:column;
+}
+
+.coluna-direita{
+    width:300px;
+}
+
+.coluna-direita h2{
+    color:#660099;
+    margin-top:0;
+}.container{
     max-width:1200px;
     margin:auto;
 }
@@ -151,91 +171,87 @@ body.dark .card a{
 
 <div class="container">
 
-<h1>Portal Operacional FUST</h1>
+<div class="portal-layout">
 
-<div class="card">
-    <a href="email.html">
-        📧 Gerador de E-mail
-    </a>
-</div>
+    <!-- ESQUERDA -->
+    <div class="coluna-esquerda">
 
-<div class="card">
-    <a href="carimbos.html">
-        📋 Gerador de Carimbos
-    </a>
-</div>
-<h2 class="secao-titulo">🔗 LINKS ÚTEIS</h2>
+        <div class="card">
+            <a href="email.html">
+                📧 Gerador de E-mail
+            </a>
+        </div>
 
-<div class="links-uteis">
+        <div class="card">
+            <a href="carimbos.html">
+                📋 Gerador de Carimbos
+            </a>
+        </div>
 
-    <div class="card-link">
-        https://vivob2b.service-now.com/now/nav/ui/classic/params/target/home.do
-            Service Now
-        </a>
+        <div class="card">
+            atos.html">
+                📞 Busca de Contatos
+            </a>
+        </div>
+
     </div>
 
-    <div class="card-link">
-        <a href="https://use1-omada-cloud.tplinkcloud.com/#/child/devices" target="_blank">
-            Omada
-        </a>
+    <!-- DIREITA -->
+    <div class="coluna-direita">
+
+        <h2 class="secao-titulo">🔗 LINKS ÚTEIS</h2>
+
+        <div class="card-link">
+            https://vivob2b.service-now.com/now/nav/ui/classic/params/target/home.do" target="_blank">
+                Service Now
+            </a>
+        </div>
+
+        <div class="card-link">
+            -omada-cloud.tplinkcloud.com/#/child/devices" target="_blank">
+                Omada
+            </a>
+        </div>
+
+        <div class="card-link">
+            sigitm.redecorp.br/SIGITMWeb/login.jsp" target="_blank">
+                SIGITM
+            </a>
+        </div>
+
+        <div class="card-link">
+            <a href="http://10.238.59.54/Star/web/Login" target="_blank">
+  class="card-link">
+            <a href="http://172.25.144.7:8502/" target="_blank">
+                nk">
+            <aST Diário de Bordo.xlsx
+                Diário de Bordo
+            </a>
+        </div>
+
+        <div class="card-link">
+            .com/sites/ProjetoFUST.TMBNL/" target="_blank">
+                Repositório FUST
+            </a>
+        </div>
+
+        <div class="card-link">
+            igitm3.redecorp.br/app/index.jsp" target="_blank">
+                SIGITM TA
+            </a>
+        </div>
+
+        <div class="card-link">
+            ://10.240.59.14/SIGITMWeb/index.jsf" target="_blank">
+                SIGITM 2
+            </a>
+        </div>
+
+        <div class="card-link">
+            <a href="https://fust-telefonica.brazilsouth.cloudapp.azure.com:40443/?orgId=2"/div>
+
     </div>
 
-    <div class="card-link">
-        http://sigitm.redecorp.br/SIGITMWeb/login.jsp
-            SIGITM
-        </a>
-    </div>
-
-    <div class="card-link">
-        .54/Star/web/Login" target="_blank">
-            Star
-        </a>
-    </div>
-
-    <div class="card-link">
-        http://172.25.144.7:8502/
-            Gerador de Senhas
-        </a>
-    </div>
-
-    <div class="card-link">
-        FUST Diário de Bordo.xlsx
-            Diário de Bordo
-        </a>
-    </div>
-
-    <div class="card-link">
-        ://telefonicacorp.sharepoint.com/sites/ProjetoFUST.TMBNL/Shared%20Documents/Forms/AllItems.aspx?e=5%3A71d0bc31f0b248d5a24b61be3573da81&sharingv2=true&fromShare=true&at=9" target="_blank">
-            Repositório FUST
-        </a>
-    </div>
-
-    <div class="card-link">
-        igitm3.redecorp.br/app/index.jsp" target="_blank">
-            SIGITM TA
-        </a>
-    </div>
-
-    <div class="card-link">
-        .240.59.14/SIGITMWeb/index.jsf" target="_blank">
-            SIGITM 2
-        </a>
-    </div>
-
-    <div class="card-link">
-        <a href="https://fust-telefonica.brazilsouth.cloudapp.azure.com:40443/?orgId=2" target="a
-        </a>
-    </div>
-
-</div>
-
-<div class="card">
-    <a href="contatos.html">
-        📞 Busca de Contatos
-    </a>
-</div>
-
-</div>
 <script>
 
 function alternarTema(){

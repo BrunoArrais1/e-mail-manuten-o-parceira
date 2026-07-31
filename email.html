@@ -98,7 +98,14 @@ body.dark button{
     border-radius:20px;
     box-shadow:0 3px 10px rgba(0,0,0,.2);
 }
-
+.obs-resumo{
+    font-size:11px;
+    color:#888;
+    font-style:italic;
+    margin-top:4px;
+    margin-bottom:8px;
+    text-align:center;
+}
 .header{
     background:#660099;
     color:white;
@@ -361,6 +368,11 @@ button:hover{
     <textarea id="falha"></textarea>
 
 <label>Resumo Manutenção</label>
+
+<div class="obs-resumo">
+    (Copiar esse texto e colar no campo Resumo do portal DELFIA)
+</div>
+
 <textarea id="resumoManutencao" readonly></textarea>
 
 <label>Texto Portal</label>
@@ -583,7 +595,13 @@ const copia =
 const link =
 `mailto:${emailDestino}?cc=${encodeURIComponent(copia)}&subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
 
-window.location.href = link;
+if(
+    confirm(
+        "⚠️ Antes de enviar o e-mail, lembre-se de alterar para a caixa do NOC FUST e adicionar a sua assinatura no final do corpo do e-mail.\n\nClique em OK para continuar."
+    )
+){
+    window.location.href = link;
+}
 
 }
 function abrirPortal(){

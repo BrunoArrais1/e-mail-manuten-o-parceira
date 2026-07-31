@@ -58,12 +58,83 @@
             margin-bottom:20px;
             box-shadow:0 3px 10px rgba(0,0,0,.1);
         }
+.topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+}
 
+.btn-voltar{
+    background:#660099;
+    color:white;
+    text-decoration:none;
+    padding:12px 18px;
+    border-radius:8px;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+    min-width:220px;
+    text-align:center;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+.btn-tema{
+    background:#660099;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+
+    width:170px;
+    height:48px;
+
+    font-size:14px;
+}
+
+.btn-voltar:hover,
+.btn-tema:hover{
+    background:#7e1ac7;
+}
+body.dark{
+    background:#1e1e1e;
+    color:white;
+}
+
+body.dark h1,
+body.dark h2{
+    color:white;
+}
+
+body.dark .secao{
+    background:#2b2b2b;
+}
+
+body.dark .btn-voltar,
+body.dark .btn-tema{
+    background:#7e1ac7;
+}
     </style>
 
 </head>
 
 <body>
+
+<div class="topo">
+
+    index.html" class="btn-voltar">
+        🏠 Voltar ao Portal
+    </a>
+
+    <button id="temaBtn"
+            class="btn-tema"
+            onclick="alternarTema()">
+        🌙 Modo Escuro
+    </button>
+
+</div>
 
 <h1>📚 INFORMAÇÕES ÚTEIS FUST</h1>
 
@@ -108,7 +179,41 @@
     </ul>
 
 </div>
+<script>
 
+function alternarTema(){
+
+    document.body.classList.toggle("dark");
+
+    const escuro =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "tema",
+        escuro ? "dark" : "light"
+    );
+
+    document.getElementById("temaBtn").innerHTML =
+        escuro
+        ? "☀️ Modo Claro"
+        : "🌙 Modo Escuro";
+}
+
+window.addEventListener("load", () => {
+
+    const tema =
+        localStorage.getItem("tema");
+
+    if(tema === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("temaBtn").innerHTML =
+            "☀️ Modo Claro";
+    }
+});
+
+</script>
 </body>
 
 </html>

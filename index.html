@@ -194,15 +194,16 @@ body.dark .card-link a{
 body.dark .secao-titulo{
     color:white;
 }
-.logo-escolas{
+.area-esquerda{
     position:relative;
-    top:-25px;
-    margin-bottom:-15px;
-    text-align:left;
+}
+.logo-escolas{
+    position:absolute;
+    top:-70px;
+    left:0;
 }
 .logo-escolas img{
     width:220px;
-    height:auto;
 }
 </style>
 
@@ -223,12 +224,15 @@ body.dark .secao-titulo{
 <div class="portal-layout">
 
     <!-- ESQUERDA -->
-    <div class="coluna-esquerda">
 
+    <div class="area-esquerda">
+    
         <div class="logo-escolas">
              <img src="escolas-conectadas.png" 
                  alt="Escolas Conectadas">
         </div>
+        
+    <div class="coluna-esquerda">
         
         <div class="card">
             <a href="email.html">

@@ -33,7 +33,7 @@ h1{
 }
 
 .coluna-direita{
-    width:300px;
+    width:800px;
 }
 
 .coluna-direita h2{
@@ -83,19 +83,17 @@ h1{
 }
 
 .links-uteis{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    align-items:flex-start;
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:15px;
 }
-
 .card-link{
-    width:260px;
+    width:140px;
+    text-align:center;
     background:white;
-    padding:15px 20px;
+    padding:15px;
     border-radius:12px;
     box-shadow:0 4px 12px rgba(0,0,0,.12);
-    transition:.2s;
 }
 
 .card-link:hover{
@@ -225,34 +223,32 @@ body.dark .card a{
             <a href="http://10.238.59.54/Star/web/Login" target="_blank">
                   Star
             </a>
+        </div>
         <div class="card-link">
             <a href="http://172.25.144.7:8502/" target="_blank">
                 Gerador de Senhas
             </a>
+        </div>
         <div class="card-link">
             <a href="https://telefonicacorp.sharepoint.com/:x:/r/sites/ProjetoFUST.TMBNL/_layouts/15/Doc.aspx?sourcedoc=%7B39BBA3C7-AF12-45C9-A8AE-86D1E85FAC53%7D&file=FUST%20Di%25u00e1rio%20de%20Bordo.xlsx&fromShare=true&action=default&mobileredirect=true" target="_blank">
                 Diário de Bordo
             </a>
         </div>
-
         <div class="card-link">
             <a href="https://telefonicacorp.sharepoint.com/sites/ProjetoFUST.TMBNL/Shared%20Documents/Forms/AllItems.aspx?e=5%3A71d0bc31f0b248d5a24b61be3573da81&sharingv2=true&fromShare=true&at=9&CID=48db55ad%2D4f85%2D4dda%2Dab04%2D643f8dcc48d2&FolderCTID=0x0120005FC3EA644237C645951A24D61BEB0524&id=%2Fsites%2FProjetoFUST%2ETMBNL%2FShared%20Documents%2FProjeto%20FUST%20%2D%20Geral%2FImplanta%C3%A7%C3%A3o%2FRollout" target="_blank">
                 Repositório FUST
             </a>
         </div>
-
         <div class="card-link">
             <a href="sigitm3.redecorp.br/app/index.jsp" target="_blank">
                 SIGITM TA
             </a>
         </div>
-
         <div class="card-link">
             <a href="10.240.59.14/SIGITMWeb/index.jsf" target="_blank">
                 SIGITM 2
             </a>
         </div>
-
         <div class="card-link">
             <a href="https://fust-vita.brazilsouth.cloudapp.azure.com:40443/login"/div>
             Grafana

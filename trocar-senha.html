@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Troca de Senha</title>
+
+<style>
+
+body{
+    font-family:Segoe UI, Arial;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    width:400px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+h2{
+    color:#660099;
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#660099;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#7e1ac7;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>Troca de Senha Obrigatória</h2>
+
+    <input
+        id="novaSenha"
+        type="password"
+        placeholder="Nova senha">
+
+    <input
+        id="confirmarSenha"
+        type="password"
+        placeholder="Confirmar senha">
+
+    <button onclick="salvarSenha()">
+        Salvar Nova Senha
+    </button>
+
+</div>
+
+<script>
+
+function salvarSenha(){
+
+    const usuario =
+        localStorage.getItem(
+            "usuarioTrocaSenha"
+        );
+
+    const senha1 =
+        document.getElementById(
+            "novaSenha"
+        ).value;
+
+    const senha2 =
+        document.getElementById(
+            "confirmarSenha"
+        ).value;
+
+    if(senha1.length < 6){
+
+        alert(
+            "A senha deve conter pelo menos 6 caracteres."
+        );
+
+        return;
+    }
+
+    if(senha1 !== senha2){
+
+        alert(
+            "As senhas não coincidem."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "senha_" + usuario,
+        senha1
+    );
+
+    localStorage.setItem(
+        "usuarioLogado",
+        usuario
+    );
+
+    localStorage.removeItem(
+        "usuarioTrocaSenha"
+    );
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

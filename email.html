@@ -512,22 +512,28 @@ function gerarEmail(){
     if(!validarChamado()){
         return;
     }
+
     const parceira =
         document.getElementById("parceira").value;
-        if(
-    parceira &&
-    parceira.trim().toUpperCase() === "PENDENTE"
-){
 
-    alert(
-        "INEP não localizado, confirmar implantação no Diário de Bordo."
-    );
+    if(
+        parceira &&
+        parceira.trim().toUpperCase() === "PENDENTE"
+    ){
+
+        alert(
+            "INEP não localizado, confirmar implantação no Diário de Bordo."
+        );
+
+        return;
+    }
+
     const portais = {
 
-    "DELFIA":
-        "https://delfia.atlassian.net/servicedesk/customer/portal/2117/group/2453/create/3574",
+        "DELFIA":
+            "https://delfia.atlassian.net/servicedesk/customer/portal/2117/group/2453/create/3574",
 
-    "MAMINFO":
+        "MAMINFO":
         "https://mamerp.maminfo.com.br/chamados/abertura-chamados"
 
 };

@@ -13,6 +13,8 @@
 body{
     background:#f5f5f5;
     color:#333;
+    font-family:Arial, sans-serif;
+    margin:0;
 }
 
 .container{
@@ -21,45 +23,63 @@ body{
 
 /* Tema Escuro */
 
-body.dark{
+.dark{
     background:#1e1e1e;
     color:white;
 }
 
-body.dark .container{
-    background:#2b2b2b;
+.dark .container{
+    background:transparent;
 }
-
-body.dark input,
-body.dark textarea{
+.dark .resultado {
+    background: #3a3a3a;
+    color: white;
+}
+.dark h3 {
+    color: #b56cff;
+}
+.dark select,
+.dark input {
+    background: #3a3a3a;
+    color: white;
+    border: 1px solid #555
+}
+.dark .tabs button:not(.active) {
+    background: #444;
+    color: white;
+}
+.dark .box {
+    background: #2b2b2b;
+    color: white;
+}
+.dark input,
+.dark textarea{
     background:#3a3a3a;
     color:white;
     border:1px solid #555;
 }
 
-body.dark label{
+.dark label{
     color:white;
 }
 
-body.dark .readonly{
+.dark .readonly{
     background:#444;
 }
 
-body.dark #textoPortal{
+.dark #textoPortal{
     background:#3a3a3a;
     color:white;
 }
 
-body.dark .btn-voltar,
-body.dark button{
+.dark .btn-voltar,
+.dark button{
     background:#7e1ac7;
 }
-body{
-    font-family:Arial, sans-serif;
-    background:#f5f5f5;
-    margin:0;
+body.dark .box{
+    background:#2b2b2b;
+    color:white;
 }
-
 .topo{
     display:flex;
     justify-content:space-between;

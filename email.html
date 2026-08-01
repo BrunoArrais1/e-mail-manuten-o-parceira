@@ -274,6 +274,29 @@ button:hover{
 #textoPortal{
     min-height:120px;
 }
+.btn-topo{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+
+    display:none;
+
+    background:#660099;
+    color:white;
+
+    border:none;
+    border-radius:8px;
+
+    padding:12px 18px;
+
+    cursor:pointer;
+    font-weight:bold;
+
+    z-index:1000;
+}
+.btn-topo:hover{
+    background:#7e1ac7;
+}
     </style>
 
 </head>
@@ -786,9 +809,41 @@ window.addEventListener("load", () => {
 
     }
 
-});   
-</script>
+});
+function voltarTopo(){
 
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+window.addEventListener("scroll", () => {
+
+    const btn =
+        document.getElementById("btnTopo");
+
+    if(window.scrollY > 300){
+
+        btn.style.display = "block";
+
+    }else{
+
+        btn.style.display = "none";
+
+    }
+
+});
+</script>
+<button
+    id="btnTopo"
+    class="btn-topo"
+    onclick="voltarTopo()">
+
+    ⬆ Topo
+
+</button>
 </body>
 
 </html>

@@ -81,8 +81,8 @@ button:hover{
 
 <script>
 
-function salvarSenha(){
-
+async function salvarSenha(){
+    
     const usuario =
         localStorage.getItem(
             "usuarioTrocaSenha"
@@ -116,10 +116,13 @@ function salvarSenha(){
         return;
     }
 
-    localStorage.setItem(
-        "senha_" + usuario,
-        senha1
-    );
+const hashSenha =
+    await gerarHash(senha1);
+
+localStorage.setItem(
+    "senha_" + usuario,
+    hashSenha
+);
 
     localStorage.setItem(
         "usuarioLogado",
@@ -133,6 +136,32 @@ function salvarSenha(){
     window.location.href =
         "index.html";
 
+}
+
+async function gerarHash(texto){
+
+    const encoder = new TextEncoder();
+
+    const data =
+        encoder.encode(texto);
+
+    const hashBuffer =
+        await crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
+
+    const hashArray =
+        Array.from(
+            new Uint8Array(hashBuffer)
+        );
+
+    return hashArray
+        .map(b =>
+            b.toString(16)
+             .padStart(2, "0")
+        )
+        .join("");
 }
 
 </script>

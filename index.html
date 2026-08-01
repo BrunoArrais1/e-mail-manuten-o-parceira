@@ -216,6 +216,10 @@ body.dark .secao-titulo{
     </button>
 </div>
 
+<button onclick="logout()">
+    🚪 Sair
+</button>
+
 <div class="container">
 
     <h1>Portal Operacional FUST</h1>
@@ -361,6 +365,27 @@ body.dark .secao-titulo{
         <h2 class="secao-titulo">🔗 LINKS ÚTEIS</h2>
         </div>
 <script>
+
+if(
+    !localStorage.getItem(
+        "usuarioLogado"
+    )
+){
+
+    window.location.href =
+        "login.html";
+
+}
+
+function logout(){
+
+    localStorage.removeItem(
+        "usuarioLogado"
+    );
+
+    window.location.href =
+        "login.html";
+}
 
 function alternarTema(){
 

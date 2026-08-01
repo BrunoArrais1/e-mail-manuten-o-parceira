@@ -433,7 +433,21 @@ window.onload = function(){
 
     const tema =
         localStorage.getItem("tema");
+    const usuario =
+    localStorage.getItem(
+        "usuarioLogado"
+    );
 
+if(
+    document.getElementById(
+        "usuarioAtual"
+    )
+){
+    document.getElementById(
+        "usuarioAtual"
+    ).innerHTML =
+        "👤 " + usuario;
+}
     if(tema === "dark"){
 
         document.body.classList.add("dark");

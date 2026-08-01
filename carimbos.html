@@ -332,7 +332,17 @@ textarea { width:100%; height:240px; margin-top:15px; border-radius:5px; border:
 
 <script>
 
-/* ✅ FUNÇÃO CORRETA (SEM DUPLICIDADE, SEM ERRO) */
+if(
+    !localStorage.getItem(
+        "usuarioLogado"
+    )
+){
+
+    window.location.href =
+        "login.html";
+
+}
+
 function trocarAba(id, el) {
 
   document.getElementById('aba1').classList.remove('ativa');

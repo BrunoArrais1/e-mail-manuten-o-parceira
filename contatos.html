@@ -343,6 +343,17 @@ input{
 
 <script>
 
+if(
+    !localStorage.getItem(
+        "usuarioLogado"
+    )
+){
+
+    window.location.href =
+        "login.html";
+
+}
+
 let baseMunicipio = [];
 let baseINEP = [];
 

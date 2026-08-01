@@ -54,18 +54,24 @@ h1{
     position:fixed;
     bottom:20px;
     right:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     z-index:1000;
 }
 
+
 .btn-sair{
+    width:180px;
     background:#660099;
     color:white;
     border:none;
     border-radius:8px;
-    padding:12px 18px;
+    padding:12px;
     cursor:pointer;
     font-weight:bold;
     font-size:14px;
+    box-sizing:border-box;
 }
 
 .btn-sair:hover{
@@ -231,24 +237,18 @@ body.dark .secao-titulo{
 .logo-escolas img{
     width:220px;
 }
-.btn-alterar{
-
+.btn-alterar,
+.btn-sair{
+    width:180px;
+    box-sizing:border-box;
     display:block;
-
     background:#660099;
-
     color:white;
-
     text-decoration:none;
-
     text-align:center;
-
     padding:12px;
-
     border-radius:8px;
-
     margin-bottom:10px;
-
     font-weight:bold;
 }
 </style>

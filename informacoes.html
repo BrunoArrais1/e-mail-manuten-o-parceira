@@ -198,6 +198,17 @@ body.dark .btn-tema{
 </div>
 <script>
 
+if(
+    !localStorage.getItem(
+        "usuarioLogado"
+    )
+){
+
+    window.location.href =
+        "login.html";
+
+}
+
 function alternarTema(){
 
     document.body.classList.toggle("dark");

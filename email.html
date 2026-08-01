@@ -410,6 +410,17 @@ button:hover{
     
 <script>
 
+if(
+    !localStorage.getItem(
+        "usuarioLogado"
+    )
+){
+
+    window.location.href =
+        "login.html";
+
+}
+
 async function buscarINEP(){
 
     const inep = document

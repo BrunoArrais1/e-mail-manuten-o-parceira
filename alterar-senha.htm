@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Alterar Senha</title>
+
+<style>
+
+body{
+    font-family:Segoe UI, Arial;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    width:400px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+h2{
+    text-align:center;
+    color:#660099;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#660099;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#7e1ac7;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>🔑 Alterar Senha</h2>
+
+    <input
+        id="senhaAtual"
+        type="password"
+        placeholder="Senha Atual">
+
+    <input
+        id="novaSenha"
+        type="password"
+        placeholder="Nova Senha">
+
+    <input
+        id="confirmarSenha"
+        type="password"
+        placeholder="Confirmar Nova Senha">
+
+    <button onclick="alterarSenha()">
+        Salvar Alteração
+    </button>
+
+</div>
+
+<script>
+
+async function gerarHash(texto){
+
+    const encoder = new TextEncoder();
+
+    const data = encoder.encode(texto);
+
+    const hashBuffer =
+        await crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
+
+    const hashArray =
+        Array.from(
+            new Uint8Array(hashBuffer)
+        );
+
+    return hashArray
+        .map(b =>
+            b.toString(16)
+             .padStart(2,"0")
+        )
+        .join("");
+}
+
+async function alterarSenha(){
+
+    const usuario =
+        localStorage.getItem(
+            "usuarioLogado"
+        );
+
+    const senhaAtual =
+        document.getElementById(
+            "senhaAtual"
+        ).value;
+
+    const novaSenha =
+        document.getElementById(
+            "novaSenha"
+        ).value;
+
+    const confirmarSenha =
+        document.getElementById(
+            "confirmarSenha"
+        ).value;
+
+    const hashAtual =
+        await gerarHash(
+            senhaAtual
+        );
+
+    const senhaSalva =
+        localStorage.getItem(
+            "senha_" + usuario
+        );
+
+    if(hashAtual !== senhaSalva){
+
+        alert(
+            "Senha atual incorreta."
+        );
+
+        return;
+    }
+
+    if(novaSenha.length < 8){
+
+        alert(
+           "A nova senha deve possuir pelo menos 8 caracteres."
+        );
+
+        return;
+    }
+
+    if(novaSenha !== confirmarSenha){
+
+        alert(
+            "As senhas não coincidem."
+        );
+
+        return;
+    }
+
+    const novoHash =
+        await gerarHash(
+            novaSenha
+        );
+
+    localStorage.setItem(
+        "senha_" + usuario,
+        novoHash
+    );
+
+    alert(
+        "Senha alterada com sucesso."
+    );
+
+    window.location.href =
+        "index.html";
+
+}
+</script>
+
+</body>
+</html>
+
+</script>

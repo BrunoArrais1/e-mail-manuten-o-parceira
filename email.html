@@ -446,7 +446,26 @@ async function buscarINEP(){
 
         document.getElementById("parceira").value =
             registro.PARCEIRA;
+        
+const campoParceira =
+    document.getElementById("parceira");
 
+if(
+    registro.PARCEIRA &&
+    registro.PARCEIRA.trim().toUpperCase() === "PENDENTE"
+){
+
+    campoParceira.style.color = "#FF0000";
+    campoParceira.style.fontWeight = "bold";
+    campoParceira.style.backgroundColor = "#FFE5E5";
+
+}else{
+
+    campoParceira.style.color = "";
+    campoParceira.style.fontWeight = "";
+    campoParceira.style.backgroundColor = "";
+
+}
         document.getElementById("escola").value =
             registro.ESCOLA;
 
@@ -494,6 +513,16 @@ function gerarEmail(){
         return;
     }
 
+    if(
+    parceira.trim().toUpperCase() === "PENDENTE"
+){
+
+    alert(
+        "INEP não localizado, confirmar implantação no Diário de Bordo."
+    );
+
+    return;
+}
     const parceira =
         document.getElementById("parceira").value;
     const portais = {

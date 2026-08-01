@@ -149,18 +149,50 @@ function login(){
         document.getElementById("senha")
         .value;
 
+    const senhaLocal =
+        localStorage.getItem(
+            "senha_" + usuario
+        );
+
+    // Usuário já trocou a senha
+
+    if(senhaLocal){
+
+        if(senha === senhaLocal){
+
+            localStorage.setItem(
+                "usuarioLogado",
+                usuario
+            );
+
+            window.location.href =
+                "index.html";
+
+        }else{
+
+            alert(
+                "Senha inválida."
+            );
+
+        }
+
+        return;
+    }
+
+    // Primeiro acesso usando senha temporária
+
     if(
         usuarios[usuario] &&
         usuarios[usuario] === senha
     ){
 
         localStorage.setItem(
-            "usuarioLogado",
+            "usuarioTrocaSenha",
             usuario
         );
 
         window.location.href =
-            "index.html";
+            "trocar-senha.html";
 
     }else{
 

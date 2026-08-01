@@ -103,17 +103,55 @@ button:hover{
 
 <script>
 
+const usuarios = {
+
+    "aldeir.sousa": "80150558",
+    "anaelisa.almeida": "81082600",
+    "bianca.poser": "81076326",
+    "bruno.arrais": "80618671",
+    "carlos.lima": "80358264",
+    "cesar.ramos": "81004458",
+    "claudia.soares": "80999736",
+    "edgar.vieira": "80544583",
+    "eduardo.amorim": "80494865",
+    "eliel.gomes": "80638887",
+    "franz.zamboni": "81076322",
+    "gabriel.bononi": "80999764",
+    "gustavo.alves": "80969148",
+    "joao.ricardo": "80884257",
+    "kauan.pimenta": "81008496",
+    "lais.andrade": "80301532",
+    "lauriston.chaves": "80194181",
+    "leticiane.pedro": "80577343",
+    "lucas.mantovan": "81076323",
+    "lucas.mota": "81004459",
+    "luciano.leal": "80763079",
+    "luighi.gaspareto": "81000923",
+    "maiza.santos": "80749468",
+    "marcos.vinicius": "81008500",
+    "nicolas.damasceno": "80721938",
+    "pedro.pereira": "81067796",
+    "sabrina.santos": "80999721",
+    "vanusa.almeida": "80514463",
+    "willians.santos": "80544584"
+
+};
+
 function login(){
 
     const usuario =
-        document.getElementById("usuario").value;
+        document.getElementById("usuario")
+        .value
+        .trim()
+        .toLowerCase();
 
     const senha =
-        document.getElementById("senha").value;
+        document.getElementById("senha")
+        .value;
 
     if(
-        usuario === "bruno" &&
-        senha === "Fust2026!"
+        usuarios[usuario] &&
+        usuarios[usuario] === senha
     ){
 
         localStorage.setItem(

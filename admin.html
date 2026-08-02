@@ -15,7 +15,48 @@ body{
     margin:0;
     padding:30px;
 }
+.dashboard{
 
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px,1fr));
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.card-admin{
+
+    background:#f7f0ff;
+
+    border-left:5px solid #660099;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+.card-admin h3{
+
+    margin:0 0 10px 0;
+
+    color:#660099;
+
+}
+
+.card-admin span{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
 .container{
 
     max-width:900px;
@@ -93,6 +134,28 @@ li{
 
     <h1>🛠 Painel Administrativo</h1>
 
+<div class="dashboard">
+
+    <div class="card-admin">
+    <h3>👥 Usuários</h3>
+    </div>
+    <span id="totalUsuarios">0</span>
+    </div>
+
+<div class="card-admin">
+    <h3>👑 Administradores</h3>
+    <span id="totalAdmins">0</span>
+    </div>
+
+<div class="card-admin">
+    <h3>📦 Versão</h3>
+    <span>2.9</span>
+    </div>
+</div>
+    <h2>📊 Estatísticas</h2>
+
+<div id="estatisticas"></div>
+
     <h2>🔎 Recuperação de Senha</h2>
 
 <input
@@ -100,7 +163,7 @@ li{
     placeholder="Usuário">
 
 <button onclick="consultarUsuario()">
-    Resetar
+    Consultar
 </button>
 
 <div id="resultadoUsuario"></div>
@@ -155,37 +218,95 @@ li{
 
 <script>
 
+function carregarEstatisticas(){
+
+    const stats = {
+
+        "Gerador de E-mail":
+            localStorage.getItem(
+                "uso_email"
+            ) || 0,
+
+        "Gerador de Carimbos":
+            localStorage.getItem(
+                "uso_carimbos"
+            ) || 0,
+
+        "Busca de Contatos":
+            localStorage.getItem(
+                "uso_contatos"
+            ) || 0,
+
+        "Informacoes Uteis":
+            localStorage.getItem(
+                "uso_informacoes"
+            ) || 0
+
+    };
+
+    let html = "";
+
+    for(
+        const modulo in stats
+    ){
+
+        html += `
+            <p>
+                <b>${modulo}</b>:
+                ${stats[modulo]}
+            </p>
+        `;
+
+    }
+
+    document.getElementById(
+        "estatisticas"
+    ).innerHTML = html;
+
+}
+
+carregarEstatisticas();
+
+const totalUsuarios = 29;
+const totalAdmins = 2;
+
+document.getElementById("totalUsuarios")
+    .innerText = totalUsuarios;
+
+document.getElementById("totalAdmins")
+    .innerText = totalAdmins;
+
 const usuarios = {
 
-    "aldeir.sousa": "Fust@123",
-    "anaelisa.almeida": "Fust@123",
-    "bianca.poser": "Fust@123",
-    "bruno.arrais": "Fust@123",
-    "carlos.lima": "Fust@123",
-    "cesar.ramos": "Fust@123",
-    "claudia.soares": "Fust@123",
-    "edgar.vieira": "Fust@123",
-    "eduardo.amorim": "Fust@123",
-    "eliel.gomes": "Fust@123",
-    "franz.zamboni": "Fust@123",
-    "gabriel.bononi": "Fust@123",
-    "gustavo.alves": "Fust@123",
-    "joao.ricardo": "Fust@123",
-    "kauan.pimenta": "Fust@123",
-    "lais.andrade": "Fust@123",
-    "lauriston.chaves": "Fust@123",
-    "leticiane.pedro": "Fust@123",
-    "lucas.mantovan": "Fust@123",
-    "lucas.mota": "Fust@123",
-    "luciano.leal": "Fust@123",
-    "luighi.gaspareto": "Fust@123",
-    "maiza.santos": "Fust@123",
-    "marcos.vinicius": "Fust@123",
-    "nicolas.damasceno": "Fust@123",
-    "pedro.pereira": "Fust@123",
-    "sabrina.santos": "Fust@123",
-    "vanusa.almeida": "Fust@123",
-    "willians.santos": "Fust@123"
+    "aldeir.sousa": "80150558",
+    "anaelisa.almeida": "81082600",
+    "bianca.poser": "81076326",
+    "bruno.arrais": "80618671",
+    "carlos.lima": "80358264",
+    "cesar.ramos": "81004458",
+    "claudia.soares": "80999736",
+    "edgar.vieira": "80544583",
+    "eduardo.amorim": "80494865",
+    "eliel.gomes": "80638887",
+    "franz.zamboni": "81076322",
+    "gabriel.bononi": "80999764",
+    "gustavo.alves": "80969148",
+    "joao.ricardo": "80884257",
+    "kauan.pimenta": "81008496",
+    "lais.andrade": "80301532",
+    "lauriston.chaves": "80194181",
+    "leticiane.pedro": "80577343",
+    "lucas.mantovan": "81076323",
+    "lucas.mota": "81004459",
+    "luciano.leal": "80763079",
+    "luighi.gaspareto": "81000923",
+    "maiza.santos": "80749468",
+    "marcos.vinicius": "81008500",
+    "nicolas.damasceno": "80721938",
+    "pedro.pereira": "81067796",
+    "sabrina.santos": "80999721",
+    "vanusa.almeida": "80514463",
+    "willians.santos": "80544584"
 
 };
 

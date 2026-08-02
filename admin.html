@@ -16,18 +16,12 @@ body{
     padding:30px;
 }
 .dashboard{
-
     display:grid;
-
     grid-template-columns:
         repeat(auto-fit, minmax(220px,1fr));
-
     gap:20px;
-
     margin-bottom:30px;
-
 }
-
 .card-admin{
     background:#f7f0ff;
     border-left:5px solid #660099;
@@ -40,12 +34,10 @@ body{
     justify-content:center;
     align-items:center;
 }
-
 .card-admin h3{
     margin:0 0 10px 0;
     color:#660099;
 }
-
 .card-admin span{
     font-size:42px;
     font-weight:bold;
@@ -54,22 +46,33 @@ body{
 .item-estatistica{
     display:flex;
     justify-content:space-between;
-    padding:10px;
-    border-bottom:1px solid #eee;
-}
-.item-estatistica{
-    display:flex;
-    justify-content:space-between;
     align-items:center;
     padding:12px;
     border-bottom:1px solid #ddd;
     font-size:16px;
-
 }
-
 .item-estatistica b{
     color:#660099;
     font-size:20px;
+}
+.indicador-uso{
+    background:#f7f0ff;
+    border-left:5px solid #660099;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+.indicador-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid #ddd;
+}
+.indicador-item:last-child{
+    border-bottom:none;
+}
+.indicador-item b{
+    color:#660099;
 }
 .linha-recuperacao{
     display:flex;
@@ -110,6 +113,21 @@ ul{
 li{
     padding:8px;
     border-bottom:1px solid #eee;
+}
+.item-ranking{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px;
+    margin-bottom:8px;
+    background:#f7f0ff;
+    border-radius:8px;
+    border-left:5px solid #660099;
+    font-size:16px;
+}
+.item-ranking b{
+    color:#660099;
+    font-size:20px;
 }
 .btn-consultar{
     background:#660099;
@@ -178,6 +196,11 @@ li{
         <h3>👑 Administradores</h3>
         <span id="totalAdmins">0</span>
     </div>
+    
+    <div class="card-admin">
+        <h3>📊 Utilizações</h3>
+        <span id="totalUtilizacoes">0</span>
+    </div>
 
     <div class="card-admin">
         <h3>📦 Versão</h3>
@@ -190,6 +213,14 @@ li{
 
 <div id="estatisticas"></div>
 
+    <h2>🏆 Ranking de Utilização</h2>
+
+<div id="rankingUtilizacao"></div>
+
+    <h2>📈 Indicador de Uso do Portal</h2>
+
+<div id="indicadorUso"></div>
+    
     <h2>🔎 Recuperação de Senha</h2>
 
 <div class="linha-recuperacao">
@@ -260,44 +291,130 @@ li{
 
 <script>
 
+function carregarRanking(){
+
+    const ranking = [
+
+        {
+            nome:"📧 Gerador de E-mail",
+            total:Number(
+                localStorage.getItem(
+                    "uso_email"
+                ) || 0
+            )
+        },
+
+        {
+            nome:"📋 Gerador de Carimbos",
+            total:Number(
+                localStorage.getItem(
+                    "uso_carimbos"
+                ) || 0
+            )
+        },
+
+        {
+            nome:"📞 Busca de Contatos",
+            total:Number(
+                localStorage.getItem(
+                    "uso_contatos"
+                ) || 0
+            )
+        },
+
+        {
+            nome:"📚 Informações Úteis",
+            total:Number(
+                localStorage.getItem(
+                    "uso_informacoes"
+                ) || 0
+            )
+        }
+
+    ];
+
+    ranking.sort(
+        (a,b) => b.total - a.total
+    );
+
+    let html = "";
+
+    ranking.forEach(
+        (item,index) => {
+
+            let posicao = "";
+
+            if(index === 0){
+
+                posicao = "🥇";
+
+            }else if(index === 1){
+
+                posicao = "🥈";
+
+            }else if(index === 2){
+
+                posicao = "🥉";
+
+            }else{
+
+                posicao =
+                    (index + 1) + "º";
+
+            }
+
+            html += `
+                <div class="item-ranking">
+
+                    <span>
+                        ${posicao}
+                        ${item.nome}
+                    </span>
+
+                    <b>
+                        ${item.total}
+                    </b>
+
+                </div>
+            `;
+
+        }
+    );
+
+    document.getElementById(
+        "rankingUtilizacao"
+    ).innerHTML = html;
+
+}
+    
 function carregarEstatisticas(){
 
     const stats = {
 
         "Gerador de E-mail":
-            localStorage.getItem(
-                "uso_email"
-            ) || 0,
+            localStorage.getItem("uso_email") || 0,
 
         "Gerador de Carimbos":
-            localStorage.getItem(
-                "uso_carimbos"
-            ) || 0,
+            localStorage.getItem("uso_carimbos") || 0,
 
         "Busca de Contatos":
-            localStorage.getItem(
-                "uso_contatos"
-            ) || 0,
+            localStorage.getItem("uso_contatos") || 0,
 
         "Informacoes Uteis":
-            localStorage.getItem(
-                "uso_informacoes"
-            ) || 0
+            localStorage.getItem("uso_informacoes") || 0
 
     };
 
     let html = "";
 
-    for(
-        const modulo in stats
-    ){
+    for(const modulo in stats){
 
-html += `
-    <div class="item-estatistica">
-        <span>${modulo}</span>
-        <b>${stats[modulo]}</b>
-    </div>
-`;
+        html += `
+            <div class="item-estatistica">
+                <span>${modulo}</span>
+                <b>${stats[modulo]}</b>
+            </div>
+        `;
 
     }
 
@@ -306,17 +423,6 @@ html += `
     ).innerHTML = html;
 
 }
-
-carregarEstatisticas();
-
-const totalUsuarios = 29;
-const totalAdmins = 2;
-
-document.getElementById("totalUsuarios")
-    .innerText = totalUsuarios;
-
-document.getElementById("totalAdmins")
-    .innerText = totalAdmins;
 
 const usuarios = {
 
@@ -351,7 +457,73 @@ const usuarios = {
     "willians.santos": "80544584"
 
 };
+function carregarIndicadorUso(){
 
+    const totalUtilizacoes =
+
+        Number(localStorage.getItem("uso_email") || 0) +
+
+        Number(localStorage.getItem("uso_carimbos") || 0) +
+
+        Number(localStorage.getItem("uso_contatos") || 0) +
+
+        Number(localStorage.getItem("uso_informacoes") || 0);
+
+    const totalUsuarios = 29;
+    const totalAdmins = 2;
+
+document.getElementById(
+    "totalUsuarios"
+).innerText = totalUsuarios;
+
+document.getElementById(
+    "totalAdmins"
+).innerText = totalAdmins;
+
+    document.getElementById(
+        "totalUtilizacoes"
+    ).innerText = totalUtilizacoes;
+
+    const mediaUso =
+
+        (totalUtilizacoes / totalUsuarios)
+        .toFixed(2);
+
+    document.getElementById(
+        "indicadorUso"
+    ).innerHTML = `
+
+        <div class="indicador-uso">
+
+            <div class="indicador-item">
+
+                <span>📊 Total de Utilizações</span>
+
+                <b>${totalUtilizacoes}</b>
+
+            </div>
+
+            <div class="indicador-item">
+
+                <span>👥 Usuários Cadastrados</span>
+
+                <b>${totalUsuarios}</b>
+
+            </div>
+
+            <div class="indicador-item">
+
+                <span>📈 Média por Usuário</span>
+
+                <b>${mediaUso}</b>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
 function consultarUsuario(){
 
     const usuario =
@@ -407,7 +579,9 @@ if(
         "index.html";
 
 }
-
+carregarEstatisticas();
+carregarRanking();
+carregarIndicadorUso();
 </script>
 
 </body>

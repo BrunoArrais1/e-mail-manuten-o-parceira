@@ -521,6 +521,36 @@ function incrementarUso(modulo){
     }
 
 }
+const usuario =
+    localStorage.getItem(
+        "usuarioLogado"
+    );
+
+if(usuario){
+
+    let usoModuloUsuario =
+
+        Number(
+            localStorage.getItem(
+                "uso_" +
+                usuario +
+                "_" +
+                modulo
+            )
+        ) || 0;
+
+    localStorage.setItem(
+
+        "uso_" +
+        usuario +
+        "_" +
+        modulo,
+
+        usoModuloUsuario + 1
+
+    );
+
+}
 </script>
 
 <div class="logout-container">

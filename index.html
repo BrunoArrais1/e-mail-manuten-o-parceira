@@ -170,6 +170,7 @@ body.dark .rodape-dev{
 #temaBtn{
     width:160px;
     height:45px;
+    padding:10px 18px;
     background:#660099;
     color:white;
     border:none;
@@ -177,20 +178,6 @@ body.dark .rodape-dev{
     cursor:pointer;
     font-weight:bold;
     font-size:14px;
-}
-
-#temaBtn:hover{
-    background:#7e1ac7;
-}
-``
-#temaBtn{
-    background:#660099;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
 }
 
 #temaBtn:hover{
@@ -282,25 +269,29 @@ body.dark .secao-titulo{
     <div class="coluna-esquerda">
         
 <div class="card">
-    <a href="email.html">
+    <a href="email.html"
+    onclick="incrementarUso('email')">
         📧 Gerador de E-mail
     </a>
 </div>
 
 <div class="card">
-    <a href="carimbos.html">
+    <a href="carimbos.html"
+    onclick="incrementarUso('carimbos')">
         📋 Gerador de Carimbos
     </a>
 </div>
 
 <div class="card">
-    <a href="contatos.html">
+    <a href="contatos.html"
+    onclick="incrementarUso('contatos')">
         📞 Busca de Contatos
     </a>
 </div>
 
 <div class="card">
-    <a href="informacoes.html">
+    <a href="informacoes.html"
+    onclick="incrementarUso('informacoes')">
         📚 Informações Úteis
     </a>
 </div>
@@ -450,7 +441,25 @@ window.onload = function(){
     localStorage.getItem(
         "usuarioLogado"
     );
+const perfil =
+    localStorage.getItem(
+        "perfil"
+    );
 
+const btnAdmin =
+    document.getElementById(
+        "btnAdmin"
+    );
+
+if(
+    btnAdmin &&
+    perfil !== "admin"
+){
+
+    btnAdmin.style.display =
+        "none";
+
+}
 if(
     document.getElementById(
         "usuarioAtual"
@@ -471,7 +480,22 @@ if(
     }
 
 };
+function incrementarUso(modulo){
 
+    let total =
+
+        Number(
+            localStorage.getItem(
+                "uso_" + modulo
+            )
+        ) || 0;
+
+    localStorage.setItem(
+        "uso_" + modulo,
+        total + 1
+    );
+
+}
 </script>
 
 <div class="logout-container">

@@ -167,10 +167,22 @@ li{
     border-radius:8px;
     border-left:5px solid #660099;
 }
-
 .item-usuario b{
     color:#660099;
     font-size:20px;
+}
+.usuario-card{
+    background:#f7f0ff;
+    border-left:5px solid #660099;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:12px;
+}
+.usuario-titulo{
+    font-weight:bold;
+    font-size:18px;
+    color:#660099;
+    margin-bottom:10px;
 }
 </style>
 
@@ -230,6 +242,10 @@ li{
 
 <div id="usuariosAtivos"></div>
 
+    <h2>👥 Utilização por Usuário</h2>
+
+<div id="usoPorUsuario"></div>
+    
     <h2>🔎 Recuperação de Senha</h2>
 
 <div class="linha-recuperacao">
@@ -679,10 +695,98 @@ function carregarUsuariosAtivos(){
     ).innerHTML = html;
 
 }
+function carregarUsoPorUsuario(){
+
+    let html = "";
+
+    Object.keys(
+        usuarios
+    ).forEach(usuario => {
+
+        const email =
+
+            Number(
+                localStorage.getItem(
+                    "uso_" +
+                    usuario +
+                    "_email"
+                )
+            ) || 0;
+
+        const carimbos =
+
+            Number(
+                localStorage.getItem(
+                    "uso_" +
+                    usuario +
+                    "_carimbos"
+                )
+            ) || 0;
+
+        const contatos =
+
+            Number(
+                localStorage.getItem(
+                    "uso_" +
+                    usuario +
+                    "_contatos"
+                )
+            ) || 0;
+
+        const informacoes =
+
+            Number(
+                localStorage.getItem(
+                    "uso_" +
+                    usuario +
+                    "_informacoes"
+                )
+            ) || 0;
+
+        const total =
+            email +
+            carimbos +
+            contatos +
+            informacoes;
+
+        if(total === 0){
+
+            return;
+
+        }
+
+        html += `
+            <div class="usuario-card">
+
+                <div class="usuario-titulo">
+
+                    👤 ${usuario}
+
+                </div>
+
+                📧 Gerador de E-mail: ${email}<br>
+
+                📋 Gerador de Carimbos: ${carimbos}<br>
+
+                📞 Busca de Contatos: ${contatos}<br>
+
+                📚 Informações Úteis: ${informacoes}
+
+            </div>
+        `;
+
+    });
+
+    document.getElementById(
+        "usoPorUsuario"
+    ).innerHTML = html;
+
+}
 carregarEstatisticas();
 carregarRanking();
 carregarIndicadorUso();
 carregarUsuariosAtivos();
+carregarUsoPorUsuario();
 </script>
 
 </body>

@@ -137,6 +137,13 @@ const usuarios = {
 
 };
 
+    const administradores = [
+
+    "bruno.arrais",
+    "sabrina.santos"
+
+];
+    
 async function login(){
 
     const usuario =
@@ -177,6 +184,13 @@ async function login(){
                     usuario
                 );
 
+                localStorage.setItem(
+                    "perfil",
+                    administradores.includes(usuario)
+                    ? "admin"
+                    : "usuario"
+                );
+
                 window.location.href =
                     "index.html";
 
@@ -196,15 +210,22 @@ async function login(){
         const hashDigitado =
             await gerarHash(senha);
 
-        if(hashDigitado === senhaLocal){
+if(hashDigitado === senhaLocal){
 
-            localStorage.setItem(
-                "usuarioLogado",
-                usuario
-            );
+    localStorage.setItem(
+        "usuarioLogado",
+        usuario
+    );
 
-            window.location.href =
-                "index.html";
+    localStorage.setItem(
+        "perfil",
+        administradores.includes(usuario)
+        ? "admin"
+        : "usuario"
+    );
+
+    window.location.href =
+        "index.html";
 
         }else{
 
@@ -219,18 +240,25 @@ async function login(){
 
     // Primeiro acesso usando senha temporária
 
-    if(
-        usuarios[usuario] &&
-        usuarios[usuario] === senha
-    ){
+if(
+    usuarios[usuario] &&
+    usuarios[usuario] === senha
+){
 
-        localStorage.setItem(
-            "usuarioTrocaSenha",
-            usuario
-        );
+    localStorage.setItem(
+        "perfil",
+        administradores.includes(usuario)
+        ? "admin"
+        : "usuario"
+    );
 
-        window.location.href =
-            "trocar-senha.html";
+    localStorage.setItem(
+        "usuarioTrocaSenha",
+        usuario
+    );
+
+    window.location.href =
+        "trocar-senha.html";
 
     }else{
 

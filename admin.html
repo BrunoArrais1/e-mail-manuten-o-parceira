@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Painel Administrativo</title>
+
+<style>
+
+body{
+    font-family:Segoe UI, Arial;
+    background:#f5f5f5;
+    margin:0;
+    padding:30px;
+}
+
+.container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+h1{
+    color:#660099;
+    text-align:center;
+}
+
+h2{
+    color:#660099;
+}
+
+ul{
+    list-style:none;
+    padding:0;
+}
+
+li{
+    padding:8px;
+    border-bottom:1px solid #eee;
+}
+
+.btn-voltar{
+
+    display:inline-block;
+
+    margin-bottom:20px;
+
+    background:#660099;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 18px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+}
+
+.btn-voltar:hover{
+    background:#7e1ac7;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <a
+        class="btn-voltar"
+        href="index.html">
+
+        🏠 Voltar ao Portal
+
+    </a>
+
+    <h1>🛠 Painel Administrativo</h1>
+
+    <h2>Administradores</h2>
+
+    <ul>
+
+        <li>bruno.arrais</li>
+
+        <li>sabrina.santos</li>
+
+    </ul>
+
+    <h2>Usuários Cadastrados</h2>
+
+    <ul>
+
+        <li>aldeir.sousa</li>
+        <li>anaelisa.almeida</li>
+        <li>bianca.poser</li>
+        <li>bruno.arrais</li>
+        <li>carlos.lima</li>
+        <li>cesar.ramos</li>
+        <li>claudia.soares</li>
+        <li>edgar.vieira</li>
+        <li>eduardo.amorim</li>
+        <li>eliel.gomes</li>
+        <li>franz.zamboni</li>
+        <li>gabriel.bononi</li>
+        <li>gustavo.alves</li>
+        <li>joao.ricardo</li>
+        <li>kauan.pimenta</li>
+        <li>lais.andrade</li>
+        <li>lauriston.chaves</li>
+        <li>leticiane.pedro</li>
+        <li>lucas.mantovan</li>
+        <li>lucas.mota</li>
+        <li>luciano.leal</li>
+        <li>luighi.gaspareto</li>
+        <li>maiza.santos</li>
+        <li>marcos.vinicius</li>
+        <li>nicolas.damasceno</li>
+        <li>pedro.pereira</li>
+        <li>sabrina.santos</li>
+        <li>vanusa.almeida</li>
+        <li>willians.santos</li>
+
+    </ul>
+
+</div>
+
+<script>
+
+const perfil =
+    localStorage.getItem(
+        "perfil"
+    );
+
+if(
+    perfil !== "admin"
+){
+
+    alert(
+        "Acesso permitido apenas para administradores."
+    );
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

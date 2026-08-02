@@ -145,29 +145,33 @@ li{
     background:#7e1ac7;
 }
 .btn-voltar{
-
     display:inline-block;
-
     margin-bottom:20px;
-
     background:#660099;
-
     color:white;
-
     text-decoration:none;
-
     padding:12px 18px;
-
     border-radius:8px;
-
     font-weight:bold;
-
 }
-
 .btn-voltar:hover{
     background:#7e1ac7;
 }
+.item-usuario{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px;
+    margin-bottom:8px;
+    background:#f7f0ff;
+    border-radius:8px;
+    border-left:5px solid #660099;
+}
 
+.item-usuario b{
+    color:#660099;
+    font-size:20px;
+}
 </style>
 
 </head>
@@ -221,7 +225,11 @@ li{
     <h2>📈 Indicador de Uso do Portal</h2>
 
 <div id="indicadorUso"></div>
-    
+
+    <h2>👤 Estatísticas por Usuário</h2>
+
+<div id="usuariosAtivos"></div>
+
     <h2>🔎 Recuperação de Senha</h2>
 
 <div class="linha-recuperacao">
@@ -580,9 +588,101 @@ if(
         "index.html";
 
 }
+function carregarUsuariosAtivos(){
+
+    const ranking = [];
+
+    Object.keys(
+        usuarios
+    ).forEach(usuario => {
+
+        ranking.push({
+
+            usuario,
+
+            total:Number(
+
+                localStorage.getItem(
+
+                    "uso_usuario_" + usuario
+
+                ) || 0
+
+            )
+
+        });
+
+    });
+
+    ranking.sort(
+        (a,b) => b.total - a.total
+    );
+
+    let html = "";
+
+    ranking
+        .slice(0,5)
+        .forEach(
+
+            (item,index) => {
+
+                let medalha = "";
+
+                if(index === 0){
+
+                    medalha = "🥇";
+
+                }else if(index === 1){
+
+                    medalha = "🥈";
+
+                }else if(index === 2){
+
+                    medalha = "🥉";
+
+                }else{
+
+                    medalha =
+                        (index + 1) + "º";
+
+                }
+
+                html += `
+
+                    <div class="item-usuario">
+
+                        <span>
+
+                            ${medalha}
+                            ${item.usuario}
+
+                        </span>
+
+                        <b>
+
+                            ${item.total}
+
+                        </b>
+
+                    </div>
+
+                `;
+
+            }
+
+        );
+
+    document.getElementById(
+
+        "usuariosAtivos"
+
+    ).innerHTML = html;
+
+}
 carregarEstatisticas();
 carregarRanking();
 carregarIndicadorUso();
+carregarUsuariosAtivos();
 </script>
 
 </body>

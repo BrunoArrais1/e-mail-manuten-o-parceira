@@ -9,6 +9,9 @@
 
 <style>
 
+html{
+    scroll-behavior:smooth;
+}
 body{
     font-family:Segoe UI, Arial;
     background:#f5f5f5;
@@ -184,6 +187,26 @@ li{
     color:#660099;
     margin-bottom:10px;
 }
+.menu-admin{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:30px;
+}
+.menu-admin a{
+    background:#660099;
+    color:white;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.2s;
+}
+.menu-admin a:hover{
+    background:#7e1ac7;
+    transform:translateY(-2px);
+}
 </style>
 
 </head>
@@ -202,7 +225,17 @@ li{
 
     <h1>🛠 Painel Administrativo</h1>
 
-<div class="dashboard">
+<div class="menu-admin">
+
+    <a href=#estatisticas>📊 Estatísticas</a>
+    <a href=#ranking>🏆 Ranking de Utilização</a>
+    <a href=#indicador>📈 Indicador de Uso do Portal</a>
+    <a href=#usuarios>👤 Estatísticas por Usuário</a>
+    <a href=#utilizacao>👥 Utilização por Usuário</a>
+    <a href=#recuperacao>🔎 Recuperação de Senha</a>
+</div>
+    
+div class="dashboard">
 
     <div class="card-admin">
         <h3>👥 Usuários</h3>
@@ -226,27 +259,27 @@ li{
 
 </div>
     
-    <h2>📊 Estatísticas</h2>
+    <h2 id="estatisticas">📊 Estatísticas</h2>
 
 <div id="estatisticas"></div>
 
-    <h2>🏆 Ranking de Utilização</h2>
+    <h2 id="ranking">🏆 Ranking de Utilização</h2>
 
 <div id="rankingUtilizacao"></div>
 
-    <h2>📈 Indicador de Uso do Portal</h2>
+    <h2 id="indicador">📈 Indicador de Uso do Portal</h2>
 
 <div id="indicadorUso"></div>
 
-    <h2>👤 Estatísticas por Usuário</h2>
+    <h2 id="usuarios">👤 Estatísticas por Usuário</h2>
 
 <div id="usuariosAtivos"></div>
 
-    <h2>👥 Utilização por Usuário</h2>
+    <h2 id="utilizacao">👥 Utilização por Usuário</h2>
 
 <div id="usoPorUsuario"></div>
     
-    <h2>🔎 Recuperação de Senha</h2>
+    <h2 id="recuperacao">🔎 Recuperação de Senha</h2>
 
 <div class="linha-recuperacao">
 

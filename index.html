@@ -394,20 +394,22 @@ body.dark .secao-titulo{
 <script>
 
 if(
-    !localStorage.getItem(
+    !sessionStorage.getItem(
         "usuarioLogado"
     )
 ){
-
     window.location.href =
         "login.html";
-
 }
 
 function logout(){
 
-    localStorage.removeItem(
+    sessionStorage.removeItem(
         "usuarioLogado"
+    );
+
+    sessionStorage.removeItem(
+        "perfil"
     );
 
     window.location.href =
@@ -438,15 +440,14 @@ window.onload = function(){
     const tema =
         localStorage.getItem("tema");
     const usuario =
-    localStorage.getItem(
+    sessionStorage.getItem(
         "usuarioLogado"
     );
-const perfil =
-    localStorage.getItem(
+    const perfil =
+    sessionStorage.getItem(
         "perfil"
     );
-
-const btnAdmin =
+    const btnAdmin =
     document.getElementById(
         "btnAdmin"
     );

@@ -24,6 +24,76 @@ body{
     gap:15px;
     margin-bottom:30px;
 }
+.topo-admin{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.btn-tema{
+    background:#660099;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    padding:12px 18px;
+    font-size:16px;
+}
+.btn-tema:hover{
+    background:#7e1ac7;
+}
+#btnTopo{
+    display:none;
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    font-size:18px;
+    z-index:9999;
+}
+#btnTopo:hover{
+    background:#7e1ac7;
+}
+body.dark input{
+    background:#444;
+    color:white;
+    border:1px solid #666;
+}
+body.dark li{
+    border-bottom:1px solid #555;
+}
+body.dark .card-admin,
+body.dark .item-estatistica,
+body.dark .item-ranking,
+body.dark .usuario-card,
+body.dark .indicador-uso{
+    background:#3a3a3a;
+    color:white;
+}
+body.dark .card-admin h3,
+body.dark .usuario-titulo,
+body.dark .item-ranking b,
+body.dark .item-estatistica b,
+body.dark .item-usuario b,
+body.dark .indicador-item b{
+
+    color:#c88cff;
+
+}
+body.dark{
+    background:#1e1e1e;
+    color:white;
+}
+body.dark .container{
+    background:#2b2b2b;
+}
+body.dark h1,
+body.dark h2{
+color:white;
+}
 .card-admin{
     background:#f7f0ff;
     border-left:5px solid #660099;
@@ -44,6 +114,15 @@ body{
     font-size:32px;
     font-weight:bold;
     color:#660099;
+}
+body.dark .card-admin span{
+    color:#c88cff;
+}
+body.dark #resultadoUsuario{
+    color:white;
+}
+body.dark .menu-admin a{
+    background:#7e1ac7;
 }
 .item-estatistica{
     display:flex;
@@ -217,6 +296,8 @@ li{
 
 <div class="container">
 
+<div class="topo-admin">
+
     <a
         class="btn-voltar"
         href="index.html">
@@ -224,6 +305,17 @@ li{
         🏠 Voltar ao Portal
 
     </a>
+
+    <button
+        id="temaBtn"
+        class="btn-tema"
+        onclick="alternarTema()">
+
+        🌙 Modo Escuro
+
+    </button>
+
+</div>
 
     <h1>🛠 Painel Administrativo</h1>
 
@@ -263,7 +355,7 @@ li{
     
     <h2 id="estatisticas">📊 Estatísticas</h2>
 
-<div id="estatisticas"></div>
+<div id="estatisticasConteudo"></div>
 
     <h2 id="ranking">🏆 Ranking de Utilização</h2>
 
@@ -479,7 +571,7 @@ html += `
     }
 
     document.getElementById(
-        "estatisticas"
+        "estatisticasConteudo"
     ).innerHTML = html;
 
 }
@@ -824,7 +916,106 @@ carregarRanking();
 carregarIndicadorUso();
 carregarUsuariosAtivos();
 carregarUsoPorUsuario();
+
+function voltarAoTopo(){
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+    window.addEventListener(
+    "scroll",
+    () => {
+
+        const btn =
+            document.getElementById(
+                "btnTopo"
+            );
+
+        if(window.scrollY > 300){
+
+            btn.style.display =
+                "block";
+
+        }else{
+
+            btn.style.display =
+                "none";
+
+        }
+
+    }
+);
+function alternarTema(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+    const escuro =
+        document.body.classList.contains(
+            "dark"
+        );
+
+    localStorage.setItem(
+        "tema",
+        escuro
+            ? "dark"
+            : "light"
+    );
+
+    document.getElementById(
+        "temaBtn"
+    ).innerHTML =
+
+        escuro
+
+        ? "☀️ Modo Claro"
+
+        : "🌙 Modo Escuro";
+
+}
+
+window.addEventListener(
+    "load",
+    () => {
+
+        const tema =
+
+            localStorage.getItem(
+                "tema"
+            );
+
+        if(tema === "dark"){
+
+            document.body.classList.add(
+                "dark"
+            );
+
+            document.getElementById(
+                "temaBtn"
+            ).innerHTML =
+
+                "☀️ Modo Claro";
+
+        }
+
+    }
+);
 </script>
+
+<button
+    id="btnTopo"
+    onclick="voltarAoTopo()">
+
+    ⬆️
+
+</button>
 
 </body>
 

@@ -112,9 +112,9 @@ async function gerarHash(texto){
 async function alterarSenha(){
 
     const usuario =
-        localStorage.getItem(
-            "usuarioLogado"
-        );
+        sessionStorage.getItem(
+    "usuarioLogado"
+        )
 
     const senhaAtual =
         document.getElementById(

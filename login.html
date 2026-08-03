@@ -172,16 +172,16 @@ async function login(){
                     hash
                 );
 
-                localStorage.setItem(
-                    "usuarioLogado",
-                    usuario
+                sessionStorage.setItem(
+                "usuarioLogado",
+                usuario
                 );
 
-                localStorage.setItem(
-                    "perfil",
-                    administradores.includes(usuario)
-                    ? "admin"
-                    : "usuario"
+                sessionStorage.setItem(
+                "perfil",
+                administradores.includes(usuario)
+                ? "admin"
+                : "usuario"
                 );
 
                 window.location.href =
@@ -205,17 +205,17 @@ async function login(){
 
 if(hashDigitado === senhaLocal){
 
-    localStorage.setItem(
-        "usuarioLogado",
-        usuario
-    );
+sessionStorage.setItem(
+    "usuarioLogado",
+    usuario
+);
 
-    localStorage.setItem(
-        "perfil",
-        administradores.includes(usuario)
-        ? "admin"
-        : "usuario"
-    );
+sessionStorage.setItem(
+    "perfil",
+    administradores.includes(usuario)
+    ? "admin"
+    : "usuario"
+);
 
     window.location.href =
         "index.html";

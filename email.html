@@ -106,6 +106,25 @@ body.dark button{
     margin-bottom:8px;
     text-align:center;
 }
+.grupo-acao{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:250px;
+}
+
+.obs-botao{
+    font-size:11px;
+    color:#777;
+    font-style:italic;
+    text-align:center;
+    margin-bottom:6px;
+    min-height:28px;
+}
+
+body.dark .obs-botao{
+    color:#bbb;
+}
 .header{
     background:#660099;
     color:white;
@@ -404,33 +423,55 @@ button:hover{
 
 <div class="acoes">
 
-    <button class="btn-gerar"
-            type="button"
-            onclick="gerarEmail()">
+    <div class="grupo-acao">
 
-        📧 Gerar E-mail
+        <div class="obs-botao">
+            (não precisa Gerar Texto)
+        </div>
 
-    </button>
+        <button class="btn-gerar"
+                type="button"
+                onclick="gerarEmail()">
 
-    <button class="btn-gerar"
-            type="button"
-            onclick="gerarTexto()">
+            📧 Gerar E-mail
 
-        📋 Gerar Texto
+        </button>
 
-    </button>
+    </div>
 
-    <button class="btn-gerar"
-            type="button"
-            onclick="abrirPortal()">
+    <div class="grupo-acao">
 
-        🌐 Abrir Portal
+        <div class="obs-botao">
+            (clicar antes de Abrir Portal)
+        </div>
 
-    </button>
+        <button class="btn-gerar"
+                type="button"
+                onclick="gerarTexto()">
 
-</div>
-</div>
-    
+            📋 Gerar Texto
+
+        </button>
+
+    </div>
+
+    <div class="grupo-acao">
+
+        <div class="obs-botao">
+            (primeiro Gerar Texto)
+        </div>
+
+        <button class="btn-gerar"
+                type="button"
+                onclick="abrirPortal()">
+
+            🌐 Abrir Portal
+
+        </button>
+
+    </div>
+
+</div>    
 <script>
 
 if(

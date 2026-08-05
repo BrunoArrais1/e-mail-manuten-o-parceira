@@ -299,7 +299,6 @@ body.dark .secao-titulo{
 
     <!-- DIREITA -->
     <div class="coluna-direita">
-
         <h2 class="secao-titulo">
             🔗 LINKS ÚTEIS
 </h2>
@@ -391,8 +390,9 @@ body.dark .secao-titulo{
     </div>
             
         </div>
-<script>
 
+<script src="versao.js"></script>
+<script>
 if(
     !sessionStorage.getItem(
         "usuarioLogado"
@@ -436,6 +436,15 @@ function alternarTema(){
 }
 
 window.onload = function(){
+
+    document.getElementById(
+    "rodapeVersao"
+).innerHTML =
+
+    "Portal Operacional FUST • Versão " +
+    VERSAO_PORTAL +
+    " • Atualizado em " +
+    DATA_ATUALIZACAO;
 
     const tema =
         localStorage.getItem("tema");
@@ -497,7 +506,7 @@ function incrementarUso(modulo){
     );
 
     const usuario =
-        localStorage.getItem(
+        sessionStorage.getItem(
             "usuarioLogado"
         );
 
@@ -506,12 +515,12 @@ function incrementarUso(modulo){
         let usoUsuario =
 
             Number(
-                sessionStorage.getItem(
+                localStorage.getItem(
                     "uso_usuario_" + usuario
                 )
             ) || 0;
 
-        sessionStorage.setItem(
+        localStorage.setItem(
 
             "uso_usuario_" + usuario,
 
@@ -542,7 +551,6 @@ function incrementarUso(modulo){
         );
 
     }
-
 }
 </script>
 
@@ -577,8 +585,9 @@ function incrementarUso(modulo){
 
 </div>
 
-<div class="rodape-dev">
-    Portal Operacional FUST • Versão 2.9.1 • Atualizado em 03/08/2026 • Desenvolvido por Bruno Pereira Arrais | NOC FUST
+<div
+    id="rodapeVersao"
+    class="rodape-dev">
 </div>
 </body>
 

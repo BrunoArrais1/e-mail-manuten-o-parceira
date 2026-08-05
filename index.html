@@ -300,6 +300,10 @@ body.dark .secao-titulo{
     <!-- DIREITA -->
     <div class="coluna-direita">
 
+        <h2 class="secao-titulo">
+            🔗 LINKS ÚTEIS
+</h2>
+        
         <div class="links-uteis">
             
         <div class="card-link">
@@ -386,9 +390,6 @@ body.dark .secao-titulo{
         </a>
     </div>
             
-        </div>
-
-        <h2 class="secao-titulo">🔗 LINKS ÚTEIS</h2>
         </div>
 <script>
 
@@ -505,12 +506,12 @@ function incrementarUso(modulo){
         let usoUsuario =
 
             Number(
-                localStorage.getItem(
+                sessionStorage.getItem(
                     "uso_usuario_" + usuario
                 )
             ) || 0;
 
-        localStorage.setItem(
+        sessionStorage.setItem(
 
             "uso_usuario_" + usuario,
 

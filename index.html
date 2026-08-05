@@ -38,7 +38,7 @@ h1{
 }
 
 .coluna-direita{
-    width:750px;
+    width:800px;
     margin-top:15px;
 }
 
@@ -72,7 +72,6 @@ h1{
     font-size:14px;
     box-sizing:border-box;
 }
-
 .btn-sair:hover{
     background:#7e1ac7;
 }
@@ -86,11 +85,9 @@ h1{
     box-shadow:0 5px 15px rgba(0,0,0,.15);
     display:block;
 }
-
 .card:hover{
     transform:translateY(-3px);
 }
-
 .card a{
     display:flex;
     align-items:center;
@@ -113,10 +110,9 @@ h1{
     text-align:center;
     width:850px;
 }
-
-.links-uteis{
+.links-categoria{
     display:grid;
-    grid-template-columns: repeat(5, 130px);
+    grid-template-columns: repeat(5, 140px);
     gap:15px;
     justify-content:center;
     margin-bottom:40px;
@@ -135,7 +131,6 @@ h1{
 .card-link:hover{
     transform:translateY(-2px);
 }
-
 .card-link a{
     display:flex;
     align-items:center;
@@ -177,26 +172,21 @@ body.dark .rodape-dev{
     font-weight:bold;
     font-size:14px;
 }
-
 #temaBtn:hover{
     background:#7e1ac7;
 }
 
 /* TEMA ESCURO */
-
 body.dark{
     background:#1e1e1e;
     color:white;
 }
-
 body.dark h1{
     color:white;
 }
-
 body.dark .card{
     background:#2b2b2b;
 }
-
 body.dark .card a{
     color:white;
 }
@@ -204,11 +194,13 @@ body.dark .card-link{
     background:#2b2b2b;
     box-shadow:0 4px 12px rgba(0,0,0,.4);
 }
-
 body.dark .card-link a{
     color:white;
 }
 body.dark .secao-titulo{
+    color:white;
+}
+body.dark .titulo-categoria{
     color:white;
 }
 .area-esquerda{
@@ -236,6 +228,21 @@ body.dark .secao-titulo{
     margin-bottom:10px;
     font-size:14px;
     font-weight:bold;
+}
+.categoria-links{
+    margin-bottom:35px;
+    padding-bottom:20px;
+    border-bottom:1px solid #ddd;
+}
+body.dark .categoria-links{
+    border-bottom:1px solid #444;
+}
+.titulo-categoria{
+    color:#660099;
+    font-size:18px;
+    font-weight:bold;
+    margin:25px 0 15px;
+    text-align:center;
 }
 </style>
 
@@ -303,13 +310,53 @@ body.dark .secao-titulo{
             🔗 LINKS ÚTEIS
 </h2>
         
-        <div class="links-uteis">
-            
+    <div class="categoria-links">
+
+    <div class="titulo-categoria">
+
+        ⚙️ Operacional
+    </div>
+    <div class="links-categoria">
+
         <div class="card-link">
             <a href="https://vivob2b.service-now.com/now/nav/ui/classic/params/target/home.do" target="_blank">
                 Service Now
             </a>
         </div>
+
+            <div class="card-link">
+            <a href="http://sigitm.redecorp.br/SIGITMWeb/index.jsf" target="_blank">
+                SIGITM
+            </a>
+        </div>
+        
+            <div class="card-link">
+            <a href="http://10.238.59.54/Star/web/Login" target="_blank">
+                  Star
+            </a>
+        </div>
+        
+            <div class="card-link">
+            <a href="https://autenticaint.vivo.com.br/LoginCorp/?bmctx=D3346598D37D25323F24C459B0AA627D72F11002ACA4C6E5F0DC260DDCE7E518&contextType=external&username=string&challenge_topaz=true&challenge_url=https%3A%2F%2Fautenticaint.vivo.com.br%2FLoginCorp%2F&password=secure_string&request_id=3904011200893808492&authn_try_count=0&locale=pt_BR&resource_url=http%253A%252F%252Fsigitm3.redecorp.br%252Fapp%252Findex.jsp" target="_blank">
+                SIGITM TA
+            </a>
+        </div>
+            
+        <div class="card-link">
+            <a href="http://10.240.59.14/SIGITMWeb/index.jsp" target="_blank">
+                SIGITM 2
+            </a>
+        </div>
+
+    </div>
+</div>
+    <div class="categoria-links">
+        
+         <div class="titulo-categoria">
+
+        📊 Monitoramento e Apoio
+         </div>
+    <div class="links-categoria">
 
         <div class="card-link">
             <a href="https://use1-omada-cloud.tplinkcloud.com/#/devices" target="_blank">
@@ -318,23 +365,32 @@ body.dark .secao-titulo{
         </div>
 
         <div class="card-link">
-            <a href="http://sigitm.redecorp.br/SIGITMWeb/index.jsf" target="_blank">
-                SIGITM
-            </a>
-        </div>
-
-        <div class="card-link">
-            <a href="http://10.238.59.54/Star/web/Login" target="_blank">
-                  Star
-            </a>
-        </div>
-            
-        <div class="card-link">
             <a href="http://172.25.144.7:8502/" target="_blank">
                 Gerador de Senhas
             </a>
         </div>
             
+        <div class="card-link">
+            <a href="https://simet.nic.br/ativar/" target="_blank">
+                Ativar Simetbox
+            </a>
+        </div>
+        
+        <div class="card-link">
+            <a href="https://fust-telefonica.brazilsouth.cloudapp.azure.com:40443/login" target="_blank">
+            Grafana
+        </a>
+    </div>
+    </div>
+</div>
+    <div class="categoria-links">
+
+            <div class="titulo-categoria">
+
+        📁 Bases e Relatórios
+            </div>
+       <div class="links-categoria">
+           
         <div class="card-link">
             <a href="https://telefonicacorp-my.sharepoint.com/:x:/r/personal/christiane_rinaldo_telefonica_com/_layouts/15/Doc.aspx?sourcedoc=%7B7181ABDC-0AEE-44A6-A68C-DF6CF61BE7B5%7D&file=FUST Di%25u00e1rio de Bordo.xlsx&action=default&mobileredirect=true" target="_blank">
                 Diário de Bordo
@@ -352,44 +408,31 @@ body.dark .secao-titulo{
                 Repositório FUST
            </a>
         </div>
+       </div>
+       </div>
+        
+    <div class="categoria-links">
+        
+            <div class="titulo-categoria">
+
+        🤝 Parceiras
+            </div>
+        <div class="links-categoria">
 
         <div class="card-link">
             <a href="https://delfia.atlassian.net/servicedesk/customer/portal/2117" target="_blank">
                 Portal Delfia
             </a>
         </div>
-            
+    
         <div class="card-link">
             <a href="https://mamerp.maminfo.com.br/" target="_blank">
                 Portal MAMINFO
             </a>
         </div>
-                
-        <div class="card-link">
-            <a href="https://autenticaint.vivo.com.br/LoginCorp/?bmctx=D3346598D37D25323F24C459B0AA627D72F11002ACA4C6E5F0DC260DDCE7E518&contextType=external&username=string&challenge_topaz=true&challenge_url=https%3A%2F%2Fautenticaint.vivo.com.br%2FLoginCorp%2F&password=secure_string&request_id=3904011200893808492&authn_try_count=0&locale=pt_BR&resource_url=http%253A%252F%252Fsigitm3.redecorp.br%252Fapp%252Findex.jsp" target="_blank">
-                SIGITM TA
-            </a>
         </div>
-            
-        <div class="card-link">
-            <a href="http://10.240.59.14/SIGITMWeb/index.jsp" target="_blank">
-                SIGITM 2
-            </a>
-        </div>
-            
-        <div class="card-link">
-            <a href="https://simet.nic.br/ativar/" target="_blank">
-                Ativar Simetbox
-            </a>
-        </div>
-        
-        <div class="card-link">
-            <a href="https://fust-telefonica.brazilsouth.cloudapp.azure.com:40443/login" target="_blank">
-            Grafana
-        </a>
     </div>
-            
-        </div>
+</div>
 
 <script src="versao.js"></script>
 <script>
@@ -444,7 +487,7 @@ window.onload = function(){
     "Portal Operacional FUST • Versão " +
     VERSAO_PORTAL +
     " • Atualizado em " +
-    DATA_ATUALIZACAO;
+    DATA_ATUALIZACAO +
     " • Desenvolvido por Bruno Pereira Arrais | NOC FUST";
 
     const tema =

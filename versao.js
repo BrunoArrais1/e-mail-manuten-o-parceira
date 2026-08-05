@@ -1,0 +1,3 @@
+const VERSAO_PORTAL = "2.9.1";
+
+const DATA_ATUALIZACAO = "05/08/2026";

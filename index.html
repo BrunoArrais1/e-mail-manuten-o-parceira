@@ -113,38 +113,6 @@ h1{
     text-align:center;
     width:850px;
 }
-.links-categoria{
-    display:grid;
-    grid-template-columns: repeat(5, 140px);
-    gap:10px;
-    justify-content:center;
-    margin-bottom:10px;
-}
-.card-link{
-    width:115px;
-    min-height:55px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:white;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,.12);
-}
-.card-link:hover{
-    transform:translateY(-2px);
-}
-.card-link a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    height:100%;
-    text-decoration:none;
-    color:#660099;
-    font-weight:bold;
-    font-size:13px;
-    text-align:center;
-}
 .rodape-dev{
     position:fixed;
     bottom:8px;
@@ -202,9 +170,6 @@ body.dark .card-link a{
 body.dark .secao-titulo{
     color:white;
 }
-body.dark .titulo-categoria{
-    color:white;
-}
 .area-esquerda{
     position:relative;
 }
@@ -231,20 +196,28 @@ body.dark .titulo-categoria{
     font-size:14px;
     font-weight:bold;
 }
-.categoria-links{
-    margin-bottom:15px;
-    padding-bottom:10px;
-    border-bottom:1px solid #ddd;
+.links-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+    margin-top:20px;
 }
-body.dark .categoria-links{
-    border-bottom:1px solid #444;
+
+.categoria-box{
+    background:rgba(255,255,255,.85);
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
-.titulo-categoria{
-    color:#660099;
-    font-size:18px;
-    font-weight:bold;
-    margin:10px 0 8px;
-    text-align:center;
+
+body.dark .categoria-box{
+    background:#2b2b2b;
+}
+
+.links-categoria{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
 </style>
 
@@ -312,8 +285,8 @@ body.dark .categoria-links{
             🔗 LINKS ÚTEIS
 </h2>
         
-    <div class="categoria-links">
-
+    <div class="links-grid">
+<div class="categoria-box">
     <div class="titulo-categoria">
         ⚙️ Operacional
     </div>
@@ -351,8 +324,9 @@ body.dark .categoria-links{
 
     </div>
 </div>
-    <div class="categoria-links">
-        
+    </div>
+    <div class="links-grid">
+        <div class="categoria-box">
          <div class="titulo-categoria">
         📊 Monitoramento e Apoio
          </div>
@@ -383,7 +357,8 @@ body.dark .categoria-links{
     </div>
     </div>
 </div>
-    <div class="categoria-links">
+    </div>
+    <div class="links-grid">
 
             <div class="titulo-categoria">
         📁 Bases e Relatórios
@@ -410,8 +385,8 @@ body.dark .categoria-links{
        </div>
        </div>
         
-    <div class="categoria-links">
-        
+    <div class="links-grid">
+        <div class="categoria-box">
             <div class="titulo-categoria">
         🤝 Parceiras
             </div>
@@ -431,7 +406,7 @@ body.dark .categoria-links{
         </div>
     </div>
 </div>
-
+    </div>
 <script src="versao.js"></script>
 <script>
 if(

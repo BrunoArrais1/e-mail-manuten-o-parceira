@@ -165,15 +165,21 @@ body.dark .card a{
 body.dark .secao-titulo{
     color:white;
 }
-.area-esquerda{
+.cabecalho{
+    display:flex;
+    align-items:center;
+    justify-content:center;
     position:relative;
+    min-height:90px;
+    margin-bottom:15px;
 }
-.logo-escolas{
+.cabecalho .logo-escolas{
     position:absolute;
-    top:-50px;
     left:0;
+    top:50%;
+    transform:translateY(-50%);
 }
-.logo-escolas img{
+.cabecalho .logo-escolas img{
     width:220px;
 }
 .btn-alterar,
@@ -287,14 +293,11 @@ body.dark .faixa-destaque{
 .faixa-comunicados{
     width:100%;
     height:80px;
-    background:red !important;
-    border:5px solid yellow;
-    border-radius:10px;
-    overflow:hidden;
+    background:red;
+    color:white;
     display:flex;
     align-items:center;
-    margin:15px 0;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    justify-content:center;
 }
 .texto-comunicados{
     white-space:nowrap;
@@ -329,37 +332,31 @@ body.dark .faixa-comunicados{
 
 <div class="container">
 
-    <h1>Portal Operacional FUST</h1>
-    <div style="
-    background:red;
-    color:white;
-    font-size:30px;
-    padding:20px;
-    margin:20px 0;
-">
-    TESTE TESTE TESTE
-</div>
-    <div class="faixa-comunicados">
+<div class="cabecalho">
 
-    <div class="texto-comunicados">
-
-        | 🟣 Não esqueçam de preencher ou atualizar o demisto dos INC | 🟣 Abram Task para todos os acionamentos das Parceiras | 🟣 Utilizar o Carimbo para encerrar todas as Task das Parceiras | 🟣 Usem o Carimbo também para atualizar a Descrição do INC
-
-    </div>
-
-</div>
-<div class="portal-layout">
-
-    <!-- ESQUERDA -->
-
-    <div class="area-esquerda">
-    
         <div class="logo-escolas">
              <img src="escolas-conectadas.png" 
                  alt="Escolas Conectadas">
-        </div>
     </div>
-    
+
+    <h1>Portal Operacional FUST</h1>
+
+</div>
+
+<div class="faixa-comunicados">
+
+    <div class="texto-comunicados">
+
+   TESTE TESTE TESTE TESTE TESTE
+        
+    </div>
+
+</div>
+
+<div class="portal-layout">
+
+    <!-- ESQUERDA -->
+  
     <div class="coluna-esquerda">
         
 <div class="card">

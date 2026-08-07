@@ -354,11 +354,11 @@ body.dark .faixa-comunicados{
 
 <div class="faixa-comunicados">
 
-    <div class="texto-comunicados">
+<div class="texto-comunicados" id="textoComunicados">
 
-   🔴 AULAS SUSPENSAS DEVIDO VENDAVAL nas cidades RJ: Belford Roxo, Nova Iguaçu, Queimados, São João de Meriti, Nilópolis, Seropédica, Niterói, Itaguaí, Mangaratiba, Angra dos Reis, Paraty, Petrópolis e Ubatuba - SP: Caraguatatuba, São Sebastião, Bertioga e Itanhaém | 🔴 Não esqueçam de preencher ou atualizar o demisto dos INC | 🔴 Abram Task para todos os acionamentos das Parceiras | 🔴 Utilizar o Carimbo para encerrar todas as Task das Parceiras | 🔴 Usem o Carimbo também para atualizar a Descrição do INC
-        
-    </div>
+    Carregando comunicados...
+
+</div>
 
 </div>
 
@@ -552,7 +552,54 @@ function logout(){
     window.location.href =
         "login.html";
 }
+async function carregarComunicados(){
 
+    try{
+
+        const resposta = await fetch(
+            "comunicados.json?v=" + Date.now()
+        );
+
+        const comunicados =
+            await resposta.json();
+
+        const faixa =
+            document.getElementById(
+                "textoComunicados"
+            );
+
+        if(faixa){
+
+            faixa.innerHTML =
+
+                comunicados.join(
+                    " &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; "
+                );
+
+        }
+
+    }catch(erro){
+
+        console.error(
+            "Erro ao carregar comunicados:",
+            erro
+        );
+
+        const faixa =
+            document.getElementById(
+                "textoComunicados"
+            );
+
+        if(faixa){
+
+            faixa.innerHTML =
+                "⚠️ Falha ao carregar comunicados";
+
+        }
+
+    }
+
+}
 function alternarTema(){
 
     document.body.classList.toggle("dark");
@@ -573,7 +620,9 @@ function alternarTema(){
 }
 
 window.onload = function(){
-
+    
+    carregarComunicados();
+    
     document.getElementById(
     "rodapeVersao"
 ).innerHTML =

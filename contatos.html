@@ -248,7 +248,9 @@ input{
 
 <div class="topo">
 
-    <a href="index.html" class="btn-voltar">
+    <a href="#"
+   class="btn-voltar"
+   onclick="voltarPortal(); return false;">
         🏠 Voltar ao Portal
     </a>
 
@@ -507,6 +509,14 @@ function buscarINEP(){
         <b>Email:</b> ${registro["EMAIL INSTITUICAO"]}<br>
         <b>Telefone:</b> ${registro["TELEFONE INSTITUIÇÃO"]}
     `;
+
+}
+function voltarPortal(){
+
+    window.location.replace(
+        "index.html?v=" +
+        Date.now()
+    );
 
 }
 function alternarTema(){

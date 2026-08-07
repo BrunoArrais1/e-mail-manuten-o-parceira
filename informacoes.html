@@ -139,7 +139,9 @@ body.dark .btn-tema{
 
 <div class="topo">
 
-    <a href="index.html" class="btn-voltar">
+    <a href="#"
+   class="btn-voltar"
+   onclick="voltarPortal(); return false;">
         🏠 Voltar ao Portal
     </a>
 
@@ -208,7 +210,14 @@ if(
         "login.html";
 
 }
+function voltarPortal(){
 
+    window.location.replace(
+        "index.html?v=" +
+        Date.now()
+    );
+
+}
 function alternarTema(){
 
     document.body.classList.toggle("dark");

@@ -325,7 +325,9 @@ button:hover{
 
 <div class="topo">
 
-    <a href="index.html" class="btn-voltar">
+    <a href="#"
+   class="btn-voltar"
+   onclick="voltarPortal(); return false;">
         🏠 Voltar ao Portal
     </a>
 
@@ -562,6 +564,14 @@ if(
         alert("Erro ao ler o arquivo dados.json");
 
     }
+
+}
+function voltarPortal(){
+
+    window.location.replace(
+        "index.html?v=" +
+        Date.now()
+    );
 
 }
 function validarChamado(){
